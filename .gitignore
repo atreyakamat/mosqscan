@@ -35,3 +35,7 @@ android/local.properties
 # Media Storage
 /media/
 /tmp/
+
+# Archives
+*.zip
+
