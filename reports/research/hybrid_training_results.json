@@ -1,0 +1,1246 @@
+{
+  "metadata": {
+    "execution_timestamp": "2026-11-13T09:56:19Z",
+    "hardware_platform": "Intel Core i7-2600 (Sandy Bridge, 4 cores, 8 threads, AVX)",
+    "cpu_threads_allocated": 3,
+    "batch_size": 4,
+    "random_seed": 42,
+    "peak_process_ram_mb": 3130.4,
+    "production_onnx_preserved": true,
+    "production_onnx_sha256": "c3a3656f746a1bb2e7ac428e44670d89cf51f0d0f923ad3aa15420e8a4592cfa"
+  },
+  "dataset_audit": {
+    "original_specimens_count": 44,
+    "verified_augmented_count": 2245,
+    "excluded_unconfirmed_count": 215,
+    "excluded_ambiguous_count": 180,
+    "total_training_eligible_pool": 2289,
+    "unique_biological_parents": 44
+  },
+  "primary_experiment": {
+    "experiment_name": "Primary_Hybrid_Unweighted",
+    "class_weighting": false,
+    "epochs_head": 1,
+    "epochs_fine": 1,
+    "batch_size": 4,
+    "total_duration_seconds": 805.3,
+    "mean_fold_macro_f1": 0.738,
+    "std_fold_macro_f1": 0.1038,
+    "mean_fold_bal_acc": 0.7611,
+    "std_fold_bal_acc": 0.0624,
+    "pooled_out_of_fold": {
+      "total_physical_specimens": 44,
+      "macro_f1": 0.7611,
+      "balanced_accuracy": 0.7759,
+      "accuracy": 0.7955,
+      "confusion_matrix": [
+        [
+          9,
+          5,
+          1
+        ],
+        [
+          2,
+          7,
+          0
+        ],
+        [
+          1,
+          0,
+          19
+        ]
+      ],
+      "per_class": {
+        "aedes": {
+          "precision": 0.75,
+          "recall": 0.6,
+          "f1": 0.6667,
+          "support": 15
+        },
+        "anopheles": {
+          "precision": 0.5833,
+          "recall": 0.7778,
+          "f1": 0.6667,
+          "support": 9
+        },
+        "culex": {
+          "precision": 0.95,
+          "recall": 0.95,
+          "f1": 0.95,
+          "support": 20
+        }
+      }
+    },
+    "fold_statistics": [
+      {
+        "fold": 1,
+        "checkpoint_path": "/home/nimr/Projects/mosqscan/models/research/hybrid_unweighted_fold1.pt",
+        "checkpoint_sha256": "489c8f452af416323de6ed766dff4ed03c31d871ecebde9d40d68a48ccd8aa5f",
+        "train_images": 1684,
+        "train_specimens": 33,
+        "val_specimens": 11,
+        "macro_f1": 0.6,
+        "balanced_accuracy": 0.6833,
+        "accuracy": 0.6364,
+        "val_loss": 0.7195,
+        "aedes_recall": 0.25,
+        "anopheles_recall": 1.0,
+        "culex_recall": 0.8,
+        "fold_duration_seconds": 219.0
+      },
+      {
+        "fold": 2,
+        "checkpoint_path": "/home/nimr/Projects/mosqscan/models/research/hybrid_unweighted_fold2.pt",
+        "checkpoint_sha256": "e3b924895b5a2bb1bbe700dc284aeafcd37c7da9d89020828f6e21fc1674ad21",
+        "train_images": 1732,
+        "train_specimens": 33,
+        "val_specimens": 11,
+        "macro_f1": 0.8519,
+        "balanced_accuracy": 0.8333,
+        "accuracy": 0.9091,
+        "val_loss": 0.4675,
+        "aedes_recall": 1.0,
+        "anopheles_recall": 0.5,
+        "culex_recall": 1.0,
+        "fold_duration_seconds": 199.5
+      },
+      {
+        "fold": 3,
+        "checkpoint_path": "/home/nimr/Projects/mosqscan/models/research/hybrid_unweighted_fold3.pt",
+        "checkpoint_sha256": "7cbd7c1a19c0caf342586289178f7e392f8d5fa4965287517312ec56573ec16a",
+        "train_images": 1741,
+        "train_specimens": 33,
+        "val_specimens": 11,
+        "macro_f1": 0.75,
+        "balanced_accuracy": 0.7778,
+        "accuracy": 0.8182,
+        "val_loss": 0.374,
+        "aedes_recall": 0.3333,
+        "anopheles_recall": 1.0,
+        "culex_recall": 1.0,
+        "fold_duration_seconds": 194.3
+      },
+      {
+        "fold": 4,
+        "checkpoint_path": "/home/nimr/Projects/mosqscan/models/research/hybrid_unweighted_fold4.pt",
+        "checkpoint_sha256": "2df29a3f2130d3b0c41c6bcede793a88121136de67dda905d0a6f4696d765cdc",
+        "train_images": 1710,
+        "train_specimens": 33,
+        "val_specimens": 11,
+        "macro_f1": 0.75,
+        "balanced_accuracy": 0.75,
+        "accuracy": 0.8182,
+        "val_loss": 0.583,
+        "aedes_recall": 0.75,
+        "anopheles_recall": 0.5,
+        "culex_recall": 1.0,
+        "fold_duration_seconds": 192.2
+      }
+    ],
+    "specimen_predictions": [
+      {
+        "specimen_id": "Aedes_aegypti_1.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "culex",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.0758,
+          "anopheles": 0.0966,
+          "culex": 0.8276
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_10.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "anopheles",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.2636,
+          "anopheles": 0.6711,
+          "culex": 0.0653
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_2.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "anopheles",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.3335,
+          "anopheles": 0.634,
+          "culex": 0.0325
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_3.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.6877,
+          "anopheles": 0.2487,
+          "culex": 0.0636
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_5.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "anopheles",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0252,
+          "anopheles": 0.9303,
+          "culex": 0.0445
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_9.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "anopheles",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.2272,
+          "anopheles": 0.7624,
+          "culex": 0.0104
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_19.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0033,
+          "anopheles": 0.0061,
+          "culex": 0.9906
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_3.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0012,
+          "anopheles": 0.0585,
+          "culex": 0.9403
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_7.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0728,
+          "anopheles": 0.0445,
+          "culex": 0.8827
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_8.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0094,
+          "anopheles": 0.0132,
+          "culex": 0.9774
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_9.jpg",
+        "true_genus": "culex",
+        "pred_genus": "aedes",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.794,
+          "anopheles": 0.0677,
+          "culex": 0.1384
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_12.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.7866,
+          "anopheles": 0.1377,
+          "culex": 0.0757
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_14.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.3844,
+          "anopheles": 0.302,
+          "culex": 0.3136
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_4.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.6436,
+          "anopheles": 0.2823,
+          "culex": 0.0741
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_9.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.6964,
+          "anopheles": 0.1523,
+          "culex": 0.1513
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_3.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "aedes",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.6001,
+          "anopheles": 0.3082,
+          "culex": 0.0917
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_8.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "anopheles",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.3508,
+          "anopheles": 0.4468,
+          "culex": 0.2024
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_1.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.1142,
+          "anopheles": 0.0398,
+          "culex": 0.8461
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_15.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0197,
+          "anopheles": 0.0143,
+          "culex": 0.966
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_2.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.1486,
+          "anopheles": 0.0224,
+          "culex": 0.829
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_5.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.1495,
+          "anopheles": 0.4009,
+          "culex": 0.4496
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_6.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0785,
+          "anopheles": 0.0013,
+          "culex": 0.9202
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_13.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "anopheles",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.3738,
+          "anopheles": 0.608,
+          "culex": 0.0182
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_15.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.5171,
+          "anopheles": 0.1716,
+          "culex": 0.3113
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_6.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "anopheles",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.301,
+          "anopheles": 0.6625,
+          "culex": 0.0366
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_1.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "anopheles",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0877,
+          "anopheles": 0.6237,
+          "culex": 0.2886
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_6.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "anopheles",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0217,
+          "anopheles": 0.9699,
+          "culex": 0.0084
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_7.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "anopheles",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0512,
+          "anopheles": 0.9464,
+          "culex": 0.0024
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_10.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0539,
+          "anopheles": 0.1586,
+          "culex": 0.7875
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_13.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0396,
+          "anopheles": 0.051,
+          "culex": 0.9094
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_14.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0515,
+          "anopheles": 0.0399,
+          "culex": 0.9086
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_16.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0356,
+          "anopheles": 0.0463,
+          "culex": 0.9181
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_18.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0509,
+          "anopheles": 0.2669,
+          "culex": 0.6823
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_11.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.6103,
+          "anopheles": 0.3618,
+          "culex": 0.0279
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_5.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.8797,
+          "anopheles": 0.1147,
+          "culex": 0.0056
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_7.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "anopheles",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.1879,
+          "anopheles": 0.7637,
+          "culex": 0.0484
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_8.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.8659,
+          "anopheles": 0.0755,
+          "culex": 0.0586
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_2.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "aedes",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.5443,
+          "anopheles": 0.4009,
+          "culex": 0.0548
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_4.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "anopheles",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0296,
+          "anopheles": 0.9668,
+          "culex": 0.0036
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_11.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0504,
+          "anopheles": 0.461,
+          "culex": 0.4886
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_12.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.2097,
+          "anopheles": 0.322,
+          "culex": 0.4684
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_17.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.1744,
+          "anopheles": 0.3278,
+          "culex": 0.4978
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_20.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.1613,
+          "anopheles": 0.0542,
+          "culex": 0.7845
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_4.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.2599,
+          "anopheles": 0.2243,
+          "culex": 0.5158
+        }
+      }
+    ],
+    "server_latencies_during_run": [
+      69.27,
+      64.4,
+      60.25,
+      60.49
+    ]
+  },
+  "ablation_experiment": {
+    "experiment_name": "Ablation_Hybrid_ClassWeighted",
+    "class_weighting": true,
+    "epochs_head": 1,
+    "epochs_fine": 1,
+    "batch_size": 4,
+    "total_duration_seconds": 887.0,
+    "mean_fold_macro_f1": 0.7362,
+    "std_fold_macro_f1": 0.1181,
+    "mean_fold_bal_acc": 0.7722,
+    "std_fold_bal_acc": 0.0857,
+    "pooled_out_of_fold": {
+      "total_physical_specimens": 44,
+      "macro_f1": 0.7432,
+      "balanced_accuracy": 0.7741,
+      "accuracy": 0.7727,
+      "confusion_matrix": [
+        [
+          8,
+          6,
+          1
+        ],
+        [
+          1,
+          8,
+          0
+        ],
+        [
+          1,
+          1,
+          18
+        ]
+      ],
+      "per_class": {
+        "aedes": {
+          "precision": 0.8,
+          "recall": 0.5333,
+          "f1": 0.64,
+          "support": 15
+        },
+        "anopheles": {
+          "precision": 0.5333,
+          "recall": 0.8889,
+          "f1": 0.6667,
+          "support": 9
+        },
+        "culex": {
+          "precision": 0.9474,
+          "recall": 0.9,
+          "f1": 0.9231,
+          "support": 20
+        }
+      }
+    },
+    "fold_statistics": [
+      {
+        "fold": 1,
+        "checkpoint_path": "/home/nimr/Projects/mosqscan/models/research/hybrid_weighted_fold1.pt",
+        "checkpoint_sha256": "0543227813f969943bcd8544b47e2f5dcf6c74873daae61e0cac4c0654814a75",
+        "train_images": 1684,
+        "train_specimens": 33,
+        "val_specimens": 11,
+        "macro_f1": 0.6,
+        "balanced_accuracy": 0.6833,
+        "accuracy": 0.6364,
+        "val_loss": 0.6932,
+        "aedes_recall": 0.25,
+        "anopheles_recall": 1.0,
+        "culex_recall": 0.8,
+        "fold_duration_seconds": 194.3
+      },
+      {
+        "fold": 2,
+        "checkpoint_path": "/home/nimr/Projects/mosqscan/models/research/hybrid_weighted_fold2.pt",
+        "checkpoint_sha256": "b3cc05d223554e0d274fded9231f247bdea9795b572b81f2a3fe8a56072ca8a6",
+        "train_images": 1732,
+        "train_specimens": 33,
+        "val_specimens": 11,
+        "macro_f1": 0.709,
+        "balanced_accuracy": 0.7667,
+        "accuracy": 0.7273,
+        "val_loss": 0.5705,
+        "aedes_recall": 0.5,
+        "anopheles_recall": 1.0,
+        "culex_recall": 0.8,
+        "fold_duration_seconds": 254.1
+      },
+      {
+        "fold": 3,
+        "checkpoint_path": "/home/nimr/Projects/mosqscan/models/research/hybrid_weighted_fold3.pt",
+        "checkpoint_sha256": "aec19344edfeb23c9ba38620b1336737125d2efa2189365ea9b430d3b4cdb3fb",
+        "train_images": 1741,
+        "train_specimens": 33,
+        "val_specimens": 11,
+        "macro_f1": 0.8857,
+        "balanced_accuracy": 0.8889,
+        "accuracy": 0.9091,
+        "val_loss": 0.2577,
+        "aedes_recall": 0.6667,
+        "anopheles_recall": 1.0,
+        "culex_recall": 1.0,
+        "fold_duration_seconds": 232.2
+      },
+      {
+        "fold": 4,
+        "checkpoint_path": "/home/nimr/Projects/mosqscan/models/research/hybrid_weighted_fold4.pt",
+        "checkpoint_sha256": "9ba13b993e5839a12368c810a93ae0152a1344fad6a47aa731bdedb7b6444d87",
+        "train_images": 1710,
+        "train_specimens": 33,
+        "val_specimens": 11,
+        "macro_f1": 0.75,
+        "balanced_accuracy": 0.75,
+        "accuracy": 0.8182,
+        "val_loss": 0.4,
+        "aedes_recall": 0.75,
+        "anopheles_recall": 0.5,
+        "culex_recall": 1.0,
+        "fold_duration_seconds": 206.1
+      }
+    ],
+    "specimen_predictions": [
+      {
+        "specimen_id": "Aedes_aegypti_1.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "culex",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.1489,
+          "anopheles": 0.2487,
+          "culex": 0.6025
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_10.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "anopheles",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.4583,
+          "anopheles": 0.5319,
+          "culex": 0.0098
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_2.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "anopheles",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.1937,
+          "anopheles": 0.7812,
+          "culex": 0.0251
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_3.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.7945,
+          "anopheles": 0.1562,
+          "culex": 0.0493
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_5.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "anopheles",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0324,
+          "anopheles": 0.9489,
+          "culex": 0.0186
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_9.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "anopheles",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.2711,
+          "anopheles": 0.723,
+          "culex": 0.0059
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_19.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0251,
+          "anopheles": 0.0542,
+          "culex": 0.9207
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_3.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0077,
+          "anopheles": 0.2593,
+          "culex": 0.733
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_7.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.2918,
+          "anopheles": 0.0755,
+          "culex": 0.6326
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_8.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0929,
+          "anopheles": 0.0755,
+          "culex": 0.8316
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_9.jpg",
+        "true_genus": "culex",
+        "pred_genus": "aedes",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.734,
+          "anopheles": 0.0644,
+          "culex": 0.2016
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_12.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.7856,
+          "anopheles": 0.1839,
+          "culex": 0.0306
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_14.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "anopheles",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.191,
+          "anopheles": 0.5386,
+          "culex": 0.2703
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_4.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "anopheles",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.1344,
+          "anopheles": 0.8569,
+          "culex": 0.0087
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_9.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.7387,
+          "anopheles": 0.2114,
+          "culex": 0.0499
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_3.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "anopheles",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.1808,
+          "anopheles": 0.7683,
+          "culex": 0.0508
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_8.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "anopheles",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0657,
+          "anopheles": 0.8736,
+          "culex": 0.0607
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_1.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0778,
+          "anopheles": 0.109,
+          "culex": 0.8131
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_15.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0102,
+          "anopheles": 0.024,
+          "culex": 0.9657
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_2.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0459,
+          "anopheles": 0.0182,
+          "culex": 0.9359
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_5.jpg",
+        "true_genus": "culex",
+        "pred_genus": "anopheles",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.0816,
+          "anopheles": 0.6734,
+          "culex": 0.245
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_6.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0211,
+          "anopheles": 0.0051,
+          "culex": 0.9738
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_13.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.6872,
+          "anopheles": 0.2994,
+          "culex": 0.0134
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_15.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.7612,
+          "anopheles": 0.0915,
+          "culex": 0.1473
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_6.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "anopheles",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.3247,
+          "anopheles": 0.654,
+          "culex": 0.0214
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_1.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "anopheles",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0661,
+          "anopheles": 0.7159,
+          "culex": 0.218
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_6.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "anopheles",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0112,
+          "anopheles": 0.9836,
+          "culex": 0.0052
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_7.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "anopheles",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0619,
+          "anopheles": 0.9352,
+          "culex": 0.0029
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_10.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.058,
+          "anopheles": 0.1212,
+          "culex": 0.8208
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_13.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0296,
+          "anopheles": 0.0748,
+          "culex": 0.8956
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_14.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0576,
+          "anopheles": 0.0632,
+          "culex": 0.8792
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_16.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0301,
+          "anopheles": 0.0295,
+          "culex": 0.9404
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_18.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0761,
+          "anopheles": 0.1491,
+          "culex": 0.7747
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_11.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.6442,
+          "anopheles": 0.262,
+          "culex": 0.0938
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_5.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.9142,
+          "anopheles": 0.0796,
+          "culex": 0.0062
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_7.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "anopheles",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.2245,
+          "anopheles": 0.619,
+          "culex": 0.1565
+        }
+      },
+      {
+        "specimen_id": "Aedes_aegypti_8.jpg",
+        "true_genus": "aedes",
+        "pred_genus": "aedes",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.8679,
+          "anopheles": 0.0476,
+          "culex": 0.0845
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_2.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "aedes",
+        "correct": false,
+        "probabilities": {
+          "aedes": 0.5229,
+          "anopheles": 0.41,
+          "culex": 0.0672
+        }
+      },
+      {
+        "specimen_id": "Anopheles_stephensi_4.jpg",
+        "true_genus": "anopheles",
+        "pred_genus": "anopheles",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0682,
+          "anopheles": 0.9278,
+          "culex": 0.004
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_11.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0196,
+          "anopheles": 0.1424,
+          "culex": 0.8381
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_12.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.1565,
+          "anopheles": 0.1502,
+          "culex": 0.6933
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_17.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0441,
+          "anopheles": 0.2965,
+          "culex": 0.6594
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_20.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.0839,
+          "anopheles": 0.0365,
+          "culex": 0.8797
+        }
+      },
+      {
+        "specimen_id": "Culex_quinquefasciatus_4.jpg",
+        "true_genus": "culex",
+        "pred_genus": "culex",
+        "correct": true,
+        "probabilities": {
+          "aedes": 0.1647,
+          "anopheles": 0.0939,
+          "culex": 0.7414
+        }
+      }
+    ],
+    "server_latencies_during_run": [
+      58.57,
+      60.83,
+      61.21,
+      60.33
+    ]
+  }
+}

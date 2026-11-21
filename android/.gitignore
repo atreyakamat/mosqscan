@@ -1,0 +1,23 @@
+# Build outputs
+*.apk
+*.aab
+*.ap_
+output.json
+build/
+.gradle/
+
+# Keystores & Signing Secrets (NEVER COMMIT)
+*.jks
+*.keystore
+signing.properties
+keystore.properties
+*.key
+
+# Android Studio / IDE
+.idea/
+*.iml
+.navigation/
+captures/
+.externalNativeBuild/
+.cxx/
+local.properties

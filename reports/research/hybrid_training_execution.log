@@ -1,0 +1,109 @@
+Timestamp: 2026-11-13T14:57:44+05:30
+[Step 1] Verifying production API health at http://localhost:8000/health...
+Production Model Health: {"status":"healthy","model_version":"3.0.0","artifact":"vectora_v3_fp32.onnx","checksum_verified":true,"actual_sha256":"c3a3656f746a1bb2e7ac428e44670d89cf51f0d0f923ad3aa15420e8a4592cfa"}
+[Step 2] Recording baseline production API latency (20 samples)...
+Baseline Latency: Samples: 20 | Median: 65.93 ms | Mean: 70.94 ms | P95: 104.34 ms | Min: 59.13 ms | Max: 104.34 ms
+[Step 3] Stopping Ollama container to release RAM and CPU for training...
+ Container vectora-ollama Stopping 
+ Container vectora-ollama Stopped 
+Ollama container stopped successfully.
+[Step 4] Checking host available memory...
+Available RAM: 6945 MB
+Pre-training Production Model SHA-256: c3a3656f746a1bb2e7ac428e44670d89cf51f0d0f923ad3aa15420e8a4592cfa
+[Step 5] Launching background production health monitor...
+Health monitor started with PID 2484402.
+[Step 6] Running hybrid classifier training script...
+======================================================================
+VECTORA AI — HYBRID CLASSIFIER CPU TRAINING EXECUTION
+CPU Threads: 3 | Batch Size: 4 | Seed: 42
+======================================================================
+Verified Production ONNX Pre-run SHA-256: c3a3656f746a1bb2e7ac428e44670d89cf51f0d0f923ad3aa15420e8a4592cfa
+======================================================================
+1. LOADING AND AUDITING DATASET (STRICT LINEAGE)
+======================================================================
+Precomputed augmented images in manifest: 2640
+  - Verified Block-Concordant (Included): 2245
+  - Excluded (Unconfirmed Low Confidence): 215
+  - Excluded (Ambiguous Sibling Discordant): 180
+Loaded 44 original physical photographs.
+Total dataset records: 2289
+  - Physical Specimens: 44
+  - Precomputed Verified Augmentations: 2245
+  - Unique Biological Parents: 44
+Preloading all images into RAM cache...
+Preloaded 2289 images into RAM in 11.3s.
+
+======================================================================
+2. PARTITIONING (4-FOLD STRATIFIED GROUP K-FOLD)
+======================================================================
+Fold 1:
+  - Train: 1684 images (33 parents) -> {'culex': 15, 'aedes': 11, 'anopheles': 7}
+  - Val:   11 physical specimens -> {'culex': 5, 'aedes': 4, 'anopheles': 2}
+Fold 2:
+  - Train: 1732 images (33 parents) -> {'culex': 15, 'aedes': 11, 'anopheles': 7}
+  - Val:   11 physical specimens -> {'culex': 5, 'aedes': 4, 'anopheles': 2}
+Fold 3:
+  - Train: 1741 images (33 parents) -> {'culex': 15, 'aedes': 12, 'anopheles': 6}
+  - Val:   11 physical specimens -> {'culex': 5, 'aedes': 3, 'anopheles': 3}
+Fold 4:
+  - Train: 1710 images (33 parents) -> {'culex': 15, 'aedes': 11, 'anopheles': 7}
+  - Val:   11 physical specimens -> {'culex': 5, 'aedes': 4, 'anopheles': 2}
+
+======================================================================
+EXECUTING EXPERIMENT: Primary_Hybrid_Unweighted
+Class Weighting: False | Head Epochs: 1 | Fine Epochs: 1
+======================================================================
+  Fold 1 (219.0s): Macro-F1=0.6000, BalAcc=0.6833, Acc=0.6364, Anopheles-R=1.0000, ValLoss=0.7195
+  Fold 2 (199.5s): Macro-F1=0.8519, BalAcc=0.8333, Acc=0.9091, Anopheles-R=0.5000, ValLoss=0.4675
+  Fold 3 (194.3s): Macro-F1=0.7500, BalAcc=0.7778, Acc=0.8182, Anopheles-R=1.0000, ValLoss=0.3740
+  Fold 4 (192.2s): Macro-F1=0.7500, BalAcc=0.7500, Acc=0.8182, Anopheles-R=0.5000, ValLoss=0.5830
+
+--------------------------------------------------
+Summary for Primary_Hybrid_Unweighted:
+  Mean Fold Macro-F1: 0.738 +/- 0.1038
+  Pooled Macro-F1:    0.7611
+  Pooled BalAcc:      0.7759
+  Pooled Accuracy:    0.7955 (35/44)
+  Anopheles Recall:   0.7778 (7/9)
+  Confusion Matrix:   [[9, 5, 1], [2, 7, 0], [1, 0, 19]]
+--------------------------------------------------
+
+======================================================================
+EXECUTING EXPERIMENT: Ablation_Hybrid_ClassWeighted
+Class Weighting: True | Head Epochs: 1 | Fine Epochs: 1
+======================================================================
+  Fold 1 (194.3s): Macro-F1=0.6000, BalAcc=0.6833, Acc=0.6364, Anopheles-R=1.0000, ValLoss=0.6932
+  Fold 2 (254.1s): Macro-F1=0.7090, BalAcc=0.7667, Acc=0.7273, Anopheles-R=1.0000, ValLoss=0.5705
+  Fold 3 (232.2s): Macro-F1=0.8857, BalAcc=0.8889, Acc=0.9091, Anopheles-R=1.0000, ValLoss=0.2577
+  Fold 4 (206.1s): Macro-F1=0.7500, BalAcc=0.7500, Acc=0.8182, Anopheles-R=0.5000, ValLoss=0.4000
+
+--------------------------------------------------
+Summary for Ablation_Hybrid_ClassWeighted:
+  Mean Fold Macro-F1: 0.7362 +/- 0.1181
+  Pooled Macro-F1:    0.7432
+  Pooled BalAcc:      0.7741
+  Pooled Accuracy:    0.7727 (34/44)
+  Anopheles Recall:   0.8889 (8/9)
+  Confusion Matrix:   [[8, 6, 1], [1, 8, 0], [1, 1, 18]]
+--------------------------------------------------
+
+Verified Production ONNX Post-run SHA-256: c3a3656f746a1bb2e7ac428e44670d89cf51f0d0f923ad3aa15420e8a4592cfa
+Peak Process RAM: 3130.4 MB
+
+Final hybrid training results written to: /home/nimr/Projects/mosqscan/reports/research/hybrid_training_results.json
+Training completed in 1712 seconds with exit code 0.
+[Step 7] Running post-training verification...
+Post-training Production Model SHA-256: c3a3656f746a1bb2e7ac428e44670d89cf51f0d0f923ad3aa15420e8a4592cfa
+Production model integrity confirmed: SHA-256 unmodified.
+Measuring post-training production API latency (20 samples)...
+Post-training Latency: Samples: 20 | Median: 63.19 ms | Mean: 66.99 ms | P95: 85.09 ms | Min: 59.14 ms | Max: 85.09 ms
+Evaluating background latency measurements during training...
+Server Health Checks During Training: 336 total, 0 failures
+Concurrent Latency: Median 89.00 ms | Mean 91.83 ms | P95 114.00 ms | Max 222.00 ms
+Active Docker Containers Status:
+NAME                   IMAGE                   COMMAND                  SERVICE        CREATED        STATUS                    PORTS
+vectora-backend        mosqscan-backend        "sh -c 'alembic upgr…"   backend        24 hours ago   Up 34 minutes (healthy)   0.0.0.0:8000->8000/tcp
+vectora-postgres       postgres:16-alpine      "docker-entrypoint.s…"   postgres       47 hours ago   Up 6 hours (healthy)      5432/tcp
+vectora-redis          redis:7-alpine          "docker-entrypoint.s…"   redis          27 hours ago   Up 6 hours (healthy)      6379/tcp
+vectora-video-worker   mosqscan-video_worker   "celery -A app.worke…"   video_worker   24 hours ago   Up 6 hours                
+vectora-web            mosqscan-web            "docker-entrypoint.s…"   web            24 hours ago   Up 6 hours (healthy)      127.0.0.1:3001->3000/tcp

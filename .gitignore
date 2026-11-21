@@ -1,0 +1,37 @@
+# Environment & Secrets
+.env
+.env.local
+*.env
+*.keystore
+*.jks
+*.key
+signing.properties
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+.pytest_cache/
+*.db
+
+# Node / Web
+node_modules/
+.next/
+out/
+
+# Android
+android/.gradle/
+android/app/build/
+android/.idea/
+android/local.properties
+*.apk
+*.aab
+
+# Media Storage
+/media/
+/tmp/

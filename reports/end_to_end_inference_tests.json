@@ -1,0 +1,110 @@
+{
+  "timestamp": "2026-11-13T11:35:46Z",
+  "base_url": "http://localhost:8000",
+  "tests": {
+    "test_1_android_upload": {
+      "status": "PASSED",
+      "scan_id": "6fbd5f45-f9af-4172-a209-295c408a460d",
+      "predicted_genus": "aedes",
+      "processing_time_ms": 68,
+      "total_roundtrip_ms": 459.88,
+      "crop_applied": true
+    },
+    "test_2_web_upload": {
+      "status": "PASSED",
+      "scan_id_crop": "100f22ad-7792-4596-b915-9c69d458b3c4",
+      "scan_id_fallback": "2253a8f3-765a-4d73-a214-18a1a9aadad1",
+      "crop_mode_1": "manual_specimen_crop",
+      "crop_mode_2": "full_image_fallback"
+    },
+    "test_3_class_mapping": {
+      "status": "PASSED",
+      "classes_index_map": {
+        "0": "aedes",
+        "1": "anopheles",
+        "2": "culex"
+      },
+      "verified_in_inference_scores": true
+    },
+    "test_4_structured_schema": {
+      "status": "PASSED",
+      "evaluation_status": "EXPERIMENTAL_NOT_FIELD_VALIDATED",
+      "model_checksum": "c3a3656f746a1bb2e7ac428e44670d89cf51f0d0f923ad3aa15420e8a4592cfa",
+      "review_recommendation": "MANUAL_ENTOMOLOGICAL_INSPECTION_REQUIRED"
+    },
+    "test_5_db_persistence": {
+      "status": "PASSED",
+      "db_submission": "6fbd5f45-f9af-4172-a209-295c408a460d | 2c399b66-6498-41d7-9ec0-8f35497b28c3 | completed | adult",
+      "db_result": "aedes           | vectora_v3_fp32.onnx |                 68",
+      "media_records_count": 2
+    },
+    "test_6_user_isolation": {
+      "status": "PASSED",
+      "cross_access_status_code": 403,
+      "isolation_verified": true
+    },
+    "test_7_ollama_offline_resilience": {
+      "status": "PASSED",
+      "assistant_status": "unavailable",
+      "adult_inference_status_code": 201,
+      "predicted_genus": "culex"
+    },
+    "test_8_backend_restart_persistence": {
+      "status": "PASSED",
+      "retrieved_scan_id": "6fbd5f45-f9af-4172-a209-295c408a460d",
+      "retrieved_image_bytes": 2143933
+    },
+    "test_9_offline_sync_simulation": {
+      "status": "PASSED",
+      "local_id": "offline_task_1794569746",
+      "server_scan_id": "0b47d8f3-136f-40cf-99e8-f056665cc7fc",
+      "server_prediction": "anopheles",
+      "client_no_local_pred_rule_enforced": true
+    },
+    "test_10_boundary_rejection": {
+      "status": "PASSED",
+      "bad_type_error": "INVALID_FILE_TYPE",
+      "corrupt_image_error": "CORRUPTED_IMAGE",
+      "bad_crop_error": "INVALID_CROP_COORDINATES"
+    },
+    "test_11_larvae_isolation": {
+      "status": "PASSED",
+      "larvae_submissions_accessible": true,
+      "adult_model_not_called_for_larvae": true
+    },
+    "test_12_model_integrity": {
+      "status": "PASSED",
+      "expected_sha256": "c3a3656f746a1bb2e7ac428e44670d89cf51f0d0f923ad3aa15420e8a4592cfa",
+      "actual_sha256": "c3a3656f746a1bb2e7ac428e44670d89cf51f0d0f923ad3aa15420e8a4592cfa",
+      "server_checksum_verified": true
+    }
+  },
+  "benchmarks": {
+    "sample_count": 20,
+    "failed_requests": 0,
+    "roundtrip_latency_ms": {
+      "min": 393.74,
+      "median_p50": 437.49,
+      "mean": 467.92,
+      "p95": 730.58,
+      "max": 730.58
+    },
+    "onnx_model_inference_ms": {
+      "min": 60,
+      "median_p50": 68,
+      "mean": 70.3,
+      "p95": 130,
+      "max": 130
+    }
+  },
+  "summary": {
+    "total": 12,
+    "passed": 12,
+    "failed": 0
+  },
+  "assistant_explanation": {
+    "status": "SUCCESS",
+    "duration_ms": 98809.88,
+    "response": "```json\n{\n  \"explanation\": \"The model identified the specimen as *Aedes*, likely due to characteristics such as its typically compact body size and presence of distinct scales on the thorax. The raw score of 0.5629 reflects an experimental estimate and does not represent definitive identification. This model is a research pilot and visual identification alone is insufficient. Confirmatory entomological examination, including morphological assessment and potentially PCR analysis, is strongly recommended for accurate species determination.\"\n}\n```"
+  }
+}

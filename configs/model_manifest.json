@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "manifest_version": "1.0.0",
+  "created_at": "2026-11-11T15:35:00Z",
+  "registry": {
+    "organization": "Vectora AI Research Team",
+    "project": "vectora-ai",
+    "domain": "Entomological Vector Surveillance",
+    "deployment_tier": "pilot_experimental"
+  },
+  "candidate_model": {
+    "model_id": "vectora-efficientnet-b0-exp-b",
+    "model_name": "EfficientNet-B0 Stage 7-8 Fine-Tuned",
+    "version": "0.2.0-exp-b",
+    "release_status": "EXPERIMENTAL_NOT_FIELD_VALIDATED",
+    "lifecycle_stage": "provisional_research_candidate",
+    "selection_basis": "Highest validation Macro-F1 (0.6190) among controlled fine-tuning experiments, adhering to strict validation-only selection policy without test set leakage, and maintaining a parsimonious trainable parameter footprint (1.13M vs 3.70M).",
+    "production_validated": false,
+    "scientific_disclaimer": "This model is an experimental research artifact developed on a small pilot dataset (44 specimens, Mendeley Data v4). It has NOT been validated for clinical diagnostics, epidemiologic certification, or autonomous field deployment.",
+    "architecture": {
+      "family": "EfficientNet",
+      "variant": "efficientnet_b0",
+      "num_classes": 3,
+      "total_parameters": 4011391,
+      "trainable_parameters": 1133235,
+      "frozen_parameters": 2878156,
+      "trainable_percentage": 28.25,
+      "unfrozen_layers": [
+        "features.7",
+        "features.8",
+        "classifier.1"
+      ],
+      "frozen_layers": [
+        "features.0",
+        "features.1",
+        "features.2",
+        "features.3",
+        "features.4",
+        "features.5",
+        "features.6"
+      ]
+    },
+    "artifacts": {
+      "pytorch_checkpoint": {
+        "relative_path": "experiments/exp_B_unfreeze_stage7_8_best.pt",
+        "size_bytes": 16347189,
+        "sha256": "7b7f122cc275ba9daeb6d13c80156353054dadd22960b60c82a96bee6e00fe5f",
+        "format": "torch_state_dict",
+        "target_runtime": "PyTorch 2.5.1"
+      },
+      "onnx_fp32": {
+        "relative_path": "models/vectora_candidate_exp_b.onnx",
+        "size_bytes": 16035577,
+        "sha256": "d644b9cd9c952d461bbfbb44e8b1926cdcf9bbbfb9cd43f85065cbed0d7b1499",
+        "format": "onnx_opset_18",
+        "target_runtime": "ONNX Runtime 1.20+ (Web / Cloud)"
+      },
+      "onnx_int8": {
+        "relative_path": "models/vectora_candidate_exp_b_int8.onnx",
+        "size_bytes": 4362942,
+        "sha256": "6d7e830699f4ca3f3b67c538c2f77a592f88288845dfa00d94c7837ccef68803",
+        "format": "onnx_int8_quantized",
+        "target_runtime": "ONNX Runtime Mobile (Android CameraX Pipeline)"
+      }
+    },
+    "tensor_specification": {
+      "input": {
+        "name": "input",
+        "shape": [1, 3, 224, 224],
+        "dtype": "float32",
+        "channel_order": "RGB",
+        "layout": "NCHW"
+      },
+      "output": {
+        "name": "logits",
+        "shape": [1, 3],
+        "dtype": "float32",
+        "interpretation": "Unnormalized class logits. Apply Softmax to obtain class probabilities."
+      }
+    },
+    "preprocessing": {
+      "color_space": "RGB",
+      "target_resolution": [224, 224],
+      "interpolation": "Bilinear",
+      "pixel_range": [0.0, 1.0],
+      "normalization": {
+        "mean": [0.485, 0.456, 0.406],
+        "std": [0.229, 0.224, 0.225]
+      },
+      "image_quality_guards": {
+        "blur_detection_method": "Laplacian variance on grayscale conversion",
+        "minimum_variance_threshold": 2.0,
+        "rejection_action": "REJECTED_BLURRY"
+      }
+    },
+    "classification_schema": {
+      "class_count": 3,
+      "class_mapping": {
+        "0": {
+          "genus": "aedes",
+          "display_name": "Aedes",
+          "candidate_vectors": ["Aedes aegypti", "Aedes albopictus"],
+          "known_pathogens": ["Dengue", "Chikungunya", "Zika", "Yellow Fever"]
+        },
+        "1": {
+          "genus": "anopheles",
+          "display_name": "Anopheles",
+          "candidate_vectors": ["Anopheles stephensi", "Anopheles culicifacies"],
+          "known_pathogens": ["Malaria (Plasmodium vivax, P. falciparum)"]
+        },
+        "2": {
+          "genus": "culex",
+          "display_name": "Culex",
+          "candidate_vectors": ["Culex quinquefasciatus", "Culex pipiens"],
+          "known_pathogens": ["Lymphatic Filariasis", "West Nile Virus", "Japanese Encephalitis"]
+        }
+      },
+      "decision_thresholds": {
+        "acceptance_confidence": 0.50,
+        "below_threshold_status": "UNCERTAIN_LOW_CONFIDENCE"
+      }
+    },
+    "training_provenance": {
+      "base_weights": "EfficientNet_B0_Weights.DEFAULT (ImageNet-1K)",
+      "dataset": "Mendeley Data 88s6fvgg2p v4 (Indian Vector Mosquito Images)",
+      "specimen_split": "train: 32 (72.7%), val: 6 (13.6%), test: 6 (13.6%)",
+      "optimizer": "AdamW",
+      "classifier_lr": 0.0003,
+      "backbone_lr": 0.00001,
+      "weight_decay": 0.01,
+      "batch_size": 4,
+      "class_weights": "None (unweighted)",
+      "best_epoch": 2,
+      "early_stopping_patience": 5,
+      "random_seed": 42
+    },
+    "evaluation_metrics": {
+      "validation": {
+        "accuracy": 0.8333,
+        "macro_f1": 0.6190,
+        "per_class": {
+          "aedes": {"precision": 1.0000, "recall": 1.0000, "f1": 1.0000, "support": 2},
+          "anopheles": {"precision": 0.0000, "recall": 0.0000, "f1": 0.0000, "support": 1},
+          "culex": {"precision": 0.7500, "recall": 1.0000, "f1": 0.8571, "support": 3}
+        },
+        "confusion_matrix": [[2, 0, 0], [0, 0, 1], [0, 0, 3]]
+      },
+      "held_out_test_audit": {
+        "accuracy": 0.8333,
+        "macro_f1": 0.6000,
+        "per_class": {
+          "aedes": {"precision": 0.6667, "recall": 1.0000, "f1": 0.8000, "support": 2},
+          "anopheles": {"precision": 0.0000, "recall": 0.0000, "f1": 0.0000, "support": 1},
+          "culex": {"precision": 1.0000, "recall": 1.0000, "f1": 1.0000, "support": 3}
+        },
+        "confusion_matrix": [[2, 0, 0], [1, 0, 0], [0, 0, 3]],
+        "note": "Audited independently. Exp B was chosen based strictly on validation Macro-F1 prior to test inspection."
+      }
+    }
+  },
+  "all_registered_experiments": {
+    "exp_A_frozen_baseline": {
+      "checkpoint": "experiments/exp_A_frozen_baseline_best.pt",
+      "sha256": "b7a1022c2c29256cee426d398513234fadb80fe3864b86037fc8abbb6b955140",
+      "val_macro_f1": 0.6000,
+      "test_macro_f1": 1.0000,
+      "trainable_params": 3843
+    },
+    "exp_B_unfreeze_stage7_8": {
+      "checkpoint": "experiments/exp_B_unfreeze_stage7_8_best.pt",
+      "sha256": "7b7f122cc275ba9daeb6d13c80156353054dadd22960b60c82a96bee6e00fe5f",
+      "val_macro_f1": 0.6190,
+      "test_macro_f1": 0.6000,
+      "trainable_params": 1133235,
+      "status": "provisional_research_candidate"
+    },
+    "exp_C_unfreeze_stages5_8": {
+      "checkpoint": "experiments/exp_C_unfreeze_stages5_8_best.pt",
+      "sha256": "9faf5ecdd35322119f1c7cf01ec7ac80694cd43801670515679c51db023bed00",
+      "val_macro_f1": 0.6190,
+      "test_macro_f1": 0.6000,
+      "trainable_params": 3702731
+    },
+    "exp_B_weighted_stage7_8": {
+      "checkpoint": "experiments/exp_B_weighted_stage7_8_best.pt",
+      "sha256": "e2b1bfb4fb82a85c780d339a3012b563a3b4f4088cd6555a7eb39c69f20abb40",
+      "val_macro_f1": 0.6000,
+      "test_macro_f1": 0.8222,
+      "trainable_params": 1133235
+    },
+    "exp_C_weighted_stages5_8": {
+      "checkpoint": "experiments/exp_C_weighted_stages5_8_best.pt",
+      "sha256": "54c00b77efbd34036d47aa5e370ee41b5bb150f52eab924c25e78bc8b326078e",
+      "val_macro_f1": 0.6000,
+      "test_macro_f1": 0.8222,
+      "trainable_params": 3702731
+    }
+  }
+}

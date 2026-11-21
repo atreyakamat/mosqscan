@@ -1,0 +1,21 @@
+FROM python:3.12-slim AS builder
+WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt .
+RUN pip install --no-cache-dir --user -r requirements.txt
+
+FROM python:3.12-slim
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ffmpeg \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+RUN groupadd -r vectora && useradd -r -g vectora -m -d /home/vectora vectora
+WORKDIR /app
+COPY --from=builder /root/.local /home/vectora/.local
+COPY . .
+RUN mkdir -p /app/media /app/models && chown -R vectora:vectora /app /home/vectora
+USER vectora
+ENV PATH=/home/vectora/.local/bin:$PATH
+ENV PYTHONUNBUFFERED=1
+
+CMD ["celery", "-A", "app.workers.video_processor.celery_app", "worker", "--loglevel=info"]

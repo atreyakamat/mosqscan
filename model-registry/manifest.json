@@ -1,0 +1,166 @@
+{
+  "product": "Vectora AI",
+  "schema_version": "3.0",
+  "model_version": "3.0.0",
+  "created_at": "2026-11-11",
+  "updated_at": "2026-11-12",
+  "authoritative_status": "Vectora AI 3.0 Production Release Specification",
+  "threshold_policy": {
+    "implemented_confidence_threshold": 0.65,
+    "prd_specified_confidence_threshold": 0.70,
+    "calibration_status": "uncalibrated_heuristic",
+    "discrepancy_documentation": "PRD section 3 specifies uncertainty threshold of 0.70. Codebase implementation uses 0.65. Neither score represents a calibrated posterior probability; both operate on uncalibrated raw softmax output. The threshold remains configurable via backend settings (CONFIDENCE_THRESHOLD=0.65). Do not alter threshold without formal approval."
+  },
+  "deployed_v3_model": {
+    "model_id": "vectora-efficientnet-b0-v3",
+    "version": "3.0.0",
+    "lineage": "ImageNet initialized, SIFT-verified augmentations, 4-fold StratifiedGroupKFold cross-validation winning candidate (vectora_v3_best.pt)",
+    "training_samples": 220,
+    "original_specimens": 44,
+    "verified_augmentations": 176,
+    "status": "DEPLOYED_ACTIVE",
+    "scientific_disclaimer": "Visual identification only. Research pilot model. Not field-validated.",
+    "cross_validation_metrics": {
+      "mean_macro_f1": 0.6527,
+      "std_macro_f1": 0.2145,
+      "mean_balanced_accuracy": 0.6847,
+      "mean_anopheles_recall": 0.7500,
+      "median_latency_ms": 23.40
+    },
+    "backend_fp32": {
+      "file": "vectora_v3_fp32.onnx",
+      "sha256": "c3a3656f746a1bb2e7ac428e44670d89cf51f0d0f923ad3aa15420e8a4592cfa",
+      "size_bytes": 16035577,
+      "target": "backend-onnxruntime-cpu"
+    },
+    "android_int8": {
+      "file": "vectora_v3_int8.onnx",
+      "sha256": "f65cf4373b00bf8df812aedd039489107721c51112932956d7d98351b286ba4e",
+      "size_bytes": 4362904,
+      "target": "android-onnxruntime-mobile"
+    }
+  },
+  "deployed_baseline_model": {
+    "model_id": "vectora-baseline-efficientnet-b0",
+    "version": "1.0.0",
+    "lineage": "Baseline frozen feature extractor (efficientnet_b0_best.pt)",
+    "training_samples": 44,
+    "status": "HISTORICAL_BASELINE",
+    "scientific_disclaimer": "Visual identification only. Research pilot model. Not field-validated.",
+    "backend_fp32": {
+      "file": "efficientnet_b0.onnx",
+      "sha256": "03fc58fd99578b756415ca50a8cc8b702e7e98ad248cfe0215f836e1652b0d19",
+      "size_bytes": 16035557,
+      "target": "backend-onnxruntime-cpu"
+    },
+    "android_int8": {
+      "file": "efficientnet_b0_int8.onnx",
+      "sha256": "bac40d9af5441ddbdb6c6b19348fe04167ca4d8de7466611742022b7f505bd95",
+      "size_bytes": 4360533,
+      "target": "android-onnxruntime-mobile"
+    }
+  },
+  "candidate_model_exp_b": {
+    "model_id": "vectora-efficientnet-b0-exp-b",
+    "version": "0.2.0-exp-b",
+    "lineage": "Fine-tuned stages 7-8 (exp_B_unfreeze_stage7_8_best.pt)",
+    "training_samples": 44,
+    "status": "RESEARCH_CANDIDATE_PRESERVED",
+    "selection_basis": "Top validation Macro-F1 (0.6190) without test set leakage. Preserved as experimental candidate, not promoted to production.",
+    "backend_fp32": {
+      "file": "vectora_candidate_exp_b.onnx",
+      "sha256": "d644b9cd9c952d461bbfbb44e8b1926cdcf9bbbfb9cd43f85065cbed0d7b1499",
+      "size_bytes": 16035577,
+      "target": "backend-candidate-evaluation"
+    },
+    "android_int8": {
+      "file": "vectora_candidate_exp_b_int8.onnx",
+      "sha256": "6d7e830699f4ca3f3b67c538c2f77a592f88288845dfa00d94c7837ccef68803",
+      "size_bytes": 4362942,
+      "target": "android-candidate-evaluation"
+    }
+  },
+  "adult_classifier": {
+    "architecture": "torchvision.efficientnet_b0",
+    "num_classes": 3,
+    "classes": ["aedes", "anopheles", "culex"],
+    "input_size": [224, 224],
+    "input_color_format": "RGB",
+    "normalization": {
+      "mean": [0.485, 0.456, 0.406],
+      "std": [0.229, 0.224, 0.225]
+    },
+    "confidence_threshold": 0.65,
+    "status": "EXPERIMENTAL_NOT_FIELD_VALIDATED",
+    "scientific_disclaimer": "Visual identification only. Research pilot model. Not field-validated.",
+    "uncertainty_message": "Uncertain identification. Manual inspection is advised.",
+    "non_target_message": "Non-target object detected.",
+    "artifacts": {
+      "v3_fp32_onnx": {
+        "file": "vectora_v3_fp32.onnx",
+        "sha256": "c3a3656f746a1bb2e7ac428e44670d89cf51f0d0f923ad3aa15420e8a4592cfa",
+        "size_bytes": 16035577,
+        "deployment": "backend",
+        "format": "ONNX FP32",
+        "opset": 17
+      },
+      "v3_int8_onnx": {
+        "file": "vectora_v3_int8.onnx",
+        "sha256": "f65cf4373b00bf8df812aedd039489107721c51112932956d7d98351b286ba4e",
+        "size_bytes": 4362904,
+        "deployment": "android",
+        "format": "ONNX INT8 (dynamic quantization)",
+        "opset": 17
+      },
+      "fp32_onnx": {
+        "file": "efficientnet_b0.onnx",
+        "sha256": "03fc58fd99578b756415ca50a8cc8b702e7e98ad248cfe0215f836e1652b0d19",
+        "size_bytes": 16035557,
+        "deployment": "backend",
+        "format": "ONNX FP32",
+        "opset": 17
+      },
+      "int8_onnx": {
+        "file": "efficientnet_b0_int8.onnx",
+        "sha256": "bac40d9af5441ddbdb6c6b19348fe04167ca4d8de7466611742022b7f505bd95",
+        "size_bytes": 4360533,
+        "deployment": "android",
+        "format": "ONNX INT8 (dynamic quantization)",
+        "opset": 17
+      },
+      "candidate_exp_b_fp32": {
+        "file": "vectora_candidate_exp_b.onnx",
+        "sha256": "d644b9cd9c952d461bbfbb44e8b1926cdcf9bbbfb9cd43f85065cbed0d7b1499",
+        "size_bytes": 16035577,
+        "deployment": "backend",
+        "format": "ONNX FP32",
+        "opset": 18
+      },
+      "candidate_exp_b_int8": {
+        "file": "vectora_candidate_exp_b_int8.onnx",
+        "sha256": "6d7e830699f4ca3f3b67c538c2f77a592f88288845dfa00d94c7837ccef68803",
+        "size_bytes": 4362942,
+        "deployment": "android",
+        "format": "ONNX INT8",
+        "opset": 18
+      }
+    },
+    "evaluation": {
+      "dataset": "Mendeley 88s6fvgg2p v4 (original photographs)",
+      "test_samples": 6,
+      "test_accuracy": 0.6667,
+      "test_macro_f1": 0.4889,
+      "full_dataset_accuracy": 0.7045,
+      "full_dataset_macro_f1": 0.5823,
+      "evaluation_date": "2026-11-12",
+      "warning": "Exploratory only: tiny pilot dataset of 44 images. Not field-validated. Do not use for clinical or public health decisions."
+    }
+  },
+  "larvae_model": {
+    "status": "not_validated",
+    "prediction": null,
+    "message": "Larvae identification model is not yet field-validated and must not be used for production predictions.",
+    "pipeline_available": true,
+    "pipeline_description": "Video processing pipeline is functional but no validated classifier is integrated."
+  }
+}

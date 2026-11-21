@@ -1,0 +1,1187 @@
+{
+  "experiment": "v3_1_clean_specimen_cv",
+  "description": "StratifiedGroupKFold on 44 original biological specimens only, dynamic training augmentations, clean untouched validation specimens.",
+  "model_architecture": "efficientnet_b0",
+  "input_resolution": 224,
+  "total_folds_evaluated": 8,
+  "seeds": [
+    42,
+    1337
+  ],
+  "prd_macro_f1_target": 0.92,
+  "mean_macro_f1": 0.5023,
+  "sample_std_macro_f1": 0.1209,
+  "pop_std_macro_f1": 0.1131,
+  "prd_macro_f1_gap_percentage_points": 41.77,
+  "mean_balanced_accuracy": 0.5632,
+  "sample_std_balanced_accuracy": 0.1105,
+  "mean_overall_accuracy": 0.625,
+  "per_class_mean_recall": {
+    "aedes": 0.3438,
+    "anopheles": 0.3958,
+    "culex": 0.95
+  },
+  "cumulative_confusion_matrix": [
+    [
+      10,
+      7,
+      13
+    ],
+    [
+      3,
+      7,
+      8
+    ],
+    [
+      2,
+      0,
+      38
+    ]
+  ],
+  "folds": [
+    {
+      "macro_f1": 0.4952,
+      "balanced_accuracy": 0.5167,
+      "accuracy": 0.5455,
+      "per_class": {
+        "aedes": {
+          "precision": 0.3333,
+          "recall": 0.25,
+          "f1": 0.2857,
+          "support": 4.0
+        },
+        "anopheles": {
+          "precision": 0.3333,
+          "recall": 0.5,
+          "f1": 0.4,
+          "support": 2.0
+        },
+        "culex": {
+          "precision": 0.8,
+          "recall": 0.8,
+          "f1": 0.8,
+          "support": 5.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          4
+        ]
+      ],
+      "y_true": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "y_pred": [
+        2,
+        1,
+        1,
+        0,
+        0,
+        1,
+        2,
+        2,
+        2,
+        2,
+        0
+      ],
+      "y_probs": [
+        [
+          0.2906,
+          0.2803,
+          0.4291
+        ],
+        [
+          0.3093,
+          0.3485,
+          0.3423
+        ],
+        [
+          0.2833,
+          0.4033,
+          0.3134
+        ],
+        [
+          0.4234,
+          0.2815,
+          0.2951
+        ],
+        [
+          0.349,
+          0.3269,
+          0.3241
+        ],
+        [
+          0.3148,
+          0.3472,
+          0.338
+        ],
+        [
+          0.2233,
+          0.3298,
+          0.4469
+        ],
+        [
+          0.2632,
+          0.1568,
+          0.5801
+        ],
+        [
+          0.3223,
+          0.2815,
+          0.3961
+        ],
+        [
+          0.2831,
+          0.1632,
+          0.5537
+        ],
+        [
+          0.4288,
+          0.1529,
+          0.4183
+        ]
+      ],
+      "seed": 42,
+      "fold": 0,
+      "train_specimens": 33,
+      "val_specimens": 11,
+      "val_specimen_ids": [
+        "Aedes_aegypti_1.jpg",
+        "Aedes_aegypti_10.jpg",
+        "Aedes_aegypti_2.jpg",
+        "Aedes_aegypti_3.jpg",
+        "Anopheles_stephensi_5.jpg",
+        "Anopheles_stephensi_9.jpg",
+        "Culex_quinquefasciatus_19.jpg",
+        "Culex_quinquefasciatus_3.jpg",
+        "Culex_quinquefasciatus_7.jpg",
+        "Culex_quinquefasciatus_8.jpg",
+        "Culex_quinquefasciatus_9.jpg"
+      ],
+      "duration_seconds": 24.6
+    },
+    {
+      "macro_f1": 0.5564,
+      "balanced_accuracy": 0.5833,
+      "accuracy": 0.6364,
+      "per_class": {
+        "aedes": {
+          "precision": 1.0,
+          "recall": 0.25,
+          "f1": 0.4,
+          "support": 4.0
+        },
+        "anopheles": {
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5,
+          "support": 2.0
+        },
+        "culex": {
+          "precision": 0.625,
+          "recall": 1.0,
+          "f1": 0.7692,
+          "support": 5.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          5
+        ]
+      ],
+      "y_true": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "y_pred": [
+        0,
+        2,
+        1,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "y_probs": [
+        [
+          0.3642,
+          0.3064,
+          0.3294
+        ],
+        [
+          0.2842,
+          0.3485,
+          0.3673
+        ],
+        [
+          0.2829,
+          0.4066,
+          0.3105
+        ],
+        [
+          0.3367,
+          0.2674,
+          0.3959
+        ],
+        [
+          0.2556,
+          0.4058,
+          0.3387
+        ],
+        [
+          0.333,
+          0.2767,
+          0.3903
+        ],
+        [
+          0.2709,
+          0.2653,
+          0.4638
+        ],
+        [
+          0.2455,
+          0.2206,
+          0.5339
+        ],
+        [
+          0.1921,
+          0.1944,
+          0.6135
+        ],
+        [
+          0.2367,
+          0.2668,
+          0.4965
+        ],
+        [
+          0.1559,
+          0.1194,
+          0.7247
+        ]
+      ],
+      "seed": 42,
+      "fold": 1,
+      "train_specimens": 33,
+      "val_specimens": 11,
+      "val_specimen_ids": [
+        "Aedes_aegypti_12.jpg",
+        "Aedes_aegypti_14.jpg",
+        "Aedes_aegypti_4.jpg",
+        "Aedes_aegypti_9.jpg",
+        "Anopheles_stephensi_3.jpg",
+        "Anopheles_stephensi_8.jpg",
+        "Culex_quinquefasciatus_1.jpg",
+        "Culex_quinquefasciatus_15.jpg",
+        "Culex_quinquefasciatus_2.jpg",
+        "Culex_quinquefasciatus_5.jpg",
+        "Culex_quinquefasciatus_6.jpg"
+      ],
+      "duration_seconds": 22.5
+    },
+    {
+      "macro_f1": 0.3675,
+      "balanced_accuracy": 0.4444,
+      "accuracy": 0.5455,
+      "per_class": {
+        "aedes": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 3.0
+        },
+        "anopheles": {
+          "precision": 0.3333,
+          "recall": 0.3333,
+          "f1": 0.3333,
+          "support": 3.0
+        },
+        "culex": {
+          "precision": 0.625,
+          "recall": 1.0,
+          "f1": 0.7692,
+          "support": 5.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          0,
+          5
+        ]
+      ],
+      "y_true": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "y_pred": [
+        2,
+        1,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "y_probs": [
+        [
+          0.3086,
+          0.3055,
+          0.3859
+        ],
+        [
+          0.3175,
+          0.3443,
+          0.3382
+        ],
+        [
+          0.3325,
+          0.3829,
+          0.2846
+        ],
+        [
+          0.1566,
+          0.3427,
+          0.5007
+        ],
+        [
+          0.2174,
+          0.335,
+          0.4476
+        ],
+        [
+          0.2319,
+          0.4976,
+          0.2705
+        ],
+        [
+          0.1838,
+          0.2651,
+          0.551
+        ],
+        [
+          0.1779,
+          0.2296,
+          0.5925
+        ],
+        [
+          0.2308,
+          0.2422,
+          0.5271
+        ],
+        [
+          0.2433,
+          0.2054,
+          0.5513
+        ],
+        [
+          0.152,
+          0.239,
+          0.609
+        ]
+      ],
+      "seed": 42,
+      "fold": 2,
+      "train_specimens": 33,
+      "val_specimens": 11,
+      "val_specimen_ids": [
+        "Aedes_aegypti_13.jpg",
+        "Aedes_aegypti_15.jpg",
+        "Aedes_aegypti_6.jpg",
+        "Anopheles_stephensi_1.jpg",
+        "Anopheles_stephensi_6.jpg",
+        "Anopheles_stephensi_7.jpg",
+        "Culex_quinquefasciatus_10.jpg",
+        "Culex_quinquefasciatus_13.jpg",
+        "Culex_quinquefasciatus_14.jpg",
+        "Culex_quinquefasciatus_16.jpg",
+        "Culex_quinquefasciatus_18.jpg"
+      ],
+      "duration_seconds": 22.2
+    },
+    {
+      "macro_f1": 0.5714,
+      "balanced_accuracy": 0.6667,
+      "accuracy": 0.6364,
+      "per_class": {
+        "aedes": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 4.0
+        },
+        "anopheles": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2.0
+        },
+        "culex": {
+          "precision": 0.5556,
+          "recall": 1.0,
+          "f1": 0.7143,
+          "support": 5.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          5
+        ]
+      ],
+      "y_true": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "y_pred": [
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "y_probs": [
+        [
+          0.315,
+          0.3013,
+          0.3837
+        ],
+        [
+          0.312,
+          0.3059,
+          0.3821
+        ],
+        [
+          0.2103,
+          0.3762,
+          0.4135
+        ],
+        [
+          0.3379,
+          0.236,
+          0.4261
+        ],
+        [
+          0.2166,
+          0.4247,
+          0.3587
+        ],
+        [
+          0.2429,
+          0.4319,
+          0.3252
+        ],
+        [
+          0.1263,
+          0.2355,
+          0.6382
+        ],
+        [
+          0.2625,
+          0.295,
+          0.4425
+        ],
+        [
+          0.2095,
+          0.2552,
+          0.5353
+        ],
+        [
+          0.1555,
+          0.1937,
+          0.6508
+        ],
+        [
+          0.1154,
+          0.2353,
+          0.6494
+        ]
+      ],
+      "seed": 42,
+      "fold": 3,
+      "train_specimens": 33,
+      "val_specimens": 11,
+      "val_specimen_ids": [
+        "Aedes_aegypti_11.jpg",
+        "Aedes_aegypti_5.jpg",
+        "Aedes_aegypti_7.jpg",
+        "Aedes_aegypti_8.jpg",
+        "Anopheles_stephensi_2.jpg",
+        "Anopheles_stephensi_4.jpg",
+        "Culex_quinquefasciatus_11.jpg",
+        "Culex_quinquefasciatus_12.jpg",
+        "Culex_quinquefasciatus_17.jpg",
+        "Culex_quinquefasciatus_20.jpg",
+        "Culex_quinquefasciatus_4.jpg"
+      ],
+      "duration_seconds": 21.8
+    },
+    {
+      "macro_f1": 0.6833,
+      "balanced_accuracy": 0.7111,
+      "accuracy": 0.7273,
+      "per_class": {
+        "aedes": {
+          "precision": 0.6,
+          "recall": 1.0,
+          "f1": 0.75,
+          "support": 3.0
+        },
+        "anopheles": {
+          "precision": 1.0,
+          "recall": 0.3333,
+          "f1": 0.5,
+          "support": 3.0
+        },
+        "culex": {
+          "precision": 0.8,
+          "recall": 0.8,
+          "f1": 0.8,
+          "support": 5.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          3,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          4
+        ]
+      ],
+      "y_true": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "y_pred": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        1,
+        2,
+        2,
+        0,
+        2,
+        2
+      ],
+      "y_probs": [
+        [
+          0.3653,
+          0.2753,
+          0.3594
+        ],
+        [
+          0.3776,
+          0.2866,
+          0.3358
+        ],
+        [
+          0.3429,
+          0.3382,
+          0.3189
+        ],
+        [
+          0.3099,
+          0.3235,
+          0.3666
+        ],
+        [
+          0.4363,
+          0.3236,
+          0.2401
+        ],
+        [
+          0.3227,
+          0.3492,
+          0.3281
+        ],
+        [
+          0.3526,
+          0.2127,
+          0.4347
+        ],
+        [
+          0.315,
+          0.2256,
+          0.4594
+        ],
+        [
+          0.3478,
+          0.3378,
+          0.3144
+        ],
+        [
+          0.3301,
+          0.191,
+          0.4789
+        ],
+        [
+          0.2769,
+          0.2278,
+          0.4953
+        ]
+      ],
+      "seed": 1337,
+      "fold": 0,
+      "train_specimens": 33,
+      "val_specimens": 11,
+      "val_specimen_ids": [
+        "Aedes_aegypti_11.jpg",
+        "Aedes_aegypti_2.jpg",
+        "Aedes_aegypti_8.jpg",
+        "Anopheles_stephensi_2.jpg",
+        "Anopheles_stephensi_5.jpg",
+        "Anopheles_stephensi_9.jpg",
+        "Culex_quinquefasciatus_10.jpg",
+        "Culex_quinquefasciatus_14.jpg",
+        "Culex_quinquefasciatus_17.jpg",
+        "Culex_quinquefasciatus_18.jpg",
+        "Culex_quinquefasciatus_4.jpg"
+      ],
+      "duration_seconds": 26.5
+    },
+    {
+      "macro_f1": 0.3556,
+      "balanced_accuracy": 0.4167,
+      "accuracy": 0.5455,
+      "per_class": {
+        "aedes": {
+          "precision": 1.0,
+          "recall": 0.25,
+          "f1": 0.4,
+          "support": 4.0
+        },
+        "anopheles": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 2.0
+        },
+        "culex": {
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1": 0.6667,
+          "support": 5.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          1,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          5
+        ]
+      ],
+      "y_true": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "y_pred": [
+        2,
+        2,
+        2,
+        0,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "y_probs": [
+        [
+          0.2825,
+          0.2771,
+          0.4404
+        ],
+        [
+          0.3728,
+          0.2321,
+          0.3951
+        ],
+        [
+          0.3476,
+          0.2738,
+          0.3787
+        ],
+        [
+          0.3693,
+          0.3065,
+          0.3242
+        ],
+        [
+          0.2075,
+          0.33,
+          0.4624
+        ],
+        [
+          0.3302,
+          0.1352,
+          0.5346
+        ],
+        [
+          0.2219,
+          0.2271,
+          0.551
+        ],
+        [
+          0.3411,
+          0.2192,
+          0.4398
+        ],
+        [
+          0.2559,
+          0.2328,
+          0.5113
+        ],
+        [
+          0.1057,
+          0.1953,
+          0.699
+        ],
+        [
+          0.246,
+          0.2219,
+          0.5322
+        ]
+      ],
+      "seed": 1337,
+      "fold": 1,
+      "train_specimens": 33,
+      "val_specimens": 11,
+      "val_specimen_ids": [
+        "Aedes_aegypti_1.jpg",
+        "Aedes_aegypti_15.jpg",
+        "Aedes_aegypti_5.jpg",
+        "Aedes_aegypti_6.jpg",
+        "Anopheles_stephensi_1.jpg",
+        "Anopheles_stephensi_6.jpg",
+        "Culex_quinquefasciatus_1.jpg",
+        "Culex_quinquefasciatus_16.jpg",
+        "Culex_quinquefasciatus_20.jpg",
+        "Culex_quinquefasciatus_3.jpg",
+        "Culex_quinquefasciatus_5.jpg"
+      ],
+      "duration_seconds": 25.2
+    },
+    {
+      "macro_f1": 0.3897,
+      "balanced_accuracy": 0.5,
+      "accuracy": 0.5455,
+      "per_class": {
+        "aedes": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 4.0
+        },
+        "anopheles": {
+          "precision": 0.3333,
+          "recall": 0.5,
+          "f1": 0.4,
+          "support": 2.0
+        },
+        "culex": {
+          "precision": 0.625,
+          "recall": 1.0,
+          "f1": 0.7692,
+          "support": 5.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          2,
+          2
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          5
+        ]
+      ],
+      "y_true": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "y_pred": [
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "y_probs": [
+        [
+          0.2863,
+          0.4541,
+          0.2597
+        ],
+        [
+          0.2813,
+          0.3215,
+          0.3972
+        ],
+        [
+          0.2569,
+          0.4114,
+          0.3317
+        ],
+        [
+          0.3017,
+          0.3164,
+          0.3819
+        ],
+        [
+          0.254,
+          0.3903,
+          0.3557
+        ],
+        [
+          0.274,
+          0.35,
+          0.376
+        ],
+        [
+          0.1646,
+          0.3272,
+          0.5082
+        ],
+        [
+          0.219,
+          0.2699,
+          0.5111
+        ],
+        [
+          0.2072,
+          0.1554,
+          0.6374
+        ],
+        [
+          0.1321,
+          0.2165,
+          0.6514
+        ],
+        [
+          0.1461,
+          0.1632,
+          0.6907
+        ]
+      ],
+      "seed": 1337,
+      "fold": 2,
+      "train_specimens": 33,
+      "val_specimens": 11,
+      "val_specimen_ids": [
+        "Aedes_aegypti_13.jpg",
+        "Aedes_aegypti_14.jpg",
+        "Aedes_aegypti_4.jpg",
+        "Aedes_aegypti_9.jpg",
+        "Anopheles_stephensi_7.jpg",
+        "Anopheles_stephensi_8.jpg",
+        "Culex_quinquefasciatus_11.jpg",
+        "Culex_quinquefasciatus_12.jpg",
+        "Culex_quinquefasciatus_15.jpg",
+        "Culex_quinquefasciatus_2.jpg",
+        "Culex_quinquefasciatus_6.jpg"
+      ],
+      "duration_seconds": 26.4
+    },
+    {
+      "macro_f1": 0.5993,
+      "balanced_accuracy": 0.6667,
+      "accuracy": 0.8182,
+      "per_class": {
+        "aedes": {
+          "precision": 0.8,
+          "recall": 1.0,
+          "f1": 0.8889,
+          "support": 4.0
+        },
+        "anopheles": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 2.0
+        },
+        "culex": {
+          "precision": 0.8333,
+          "recall": 1.0,
+          "f1": 0.9091,
+          "support": 5.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          5
+        ]
+      ],
+      "y_true": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "y_pred": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "y_probs": [
+        [
+          0.4086,
+          0.2974,
+          0.294
+        ],
+        [
+          0.4051,
+          0.3135,
+          0.2814
+        ],
+        [
+          0.4452,
+          0.2323,
+          0.3225
+        ],
+        [
+          0.3591,
+          0.2999,
+          0.341
+        ],
+        [
+          0.34,
+          0.2793,
+          0.3807
+        ],
+        [
+          0.4548,
+          0.243,
+          0.3022
+        ],
+        [
+          0.2215,
+          0.2035,
+          0.575
+        ],
+        [
+          0.2708,
+          0.2978,
+          0.4314
+        ],
+        [
+          0.3368,
+          0.23,
+          0.4332
+        ],
+        [
+          0.2595,
+          0.2143,
+          0.5262
+        ],
+        [
+          0.3645,
+          0.2194,
+          0.4161
+        ]
+      ],
+      "seed": 1337,
+      "fold": 3,
+      "train_specimens": 33,
+      "val_specimens": 11,
+      "val_specimen_ids": [
+        "Aedes_aegypti_10.jpg",
+        "Aedes_aegypti_12.jpg",
+        "Aedes_aegypti_3.jpg",
+        "Aedes_aegypti_7.jpg",
+        "Anopheles_stephensi_3.jpg",
+        "Anopheles_stephensi_4.jpg",
+        "Culex_quinquefasciatus_13.jpg",
+        "Culex_quinquefasciatus_19.jpg",
+        "Culex_quinquefasciatus_7.jpg",
+        "Culex_quinquefasciatus_8.jpg",
+        "Culex_quinquefasciatus_9.jpg"
+      ],
+      "duration_seconds": 24.1
+    }
+  ]
+}

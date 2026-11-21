@@ -1,0 +1,180 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: vectora-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: vectora
+      POSTGRES_PASSWORD: vectorapass
+      POSTGRES_DB: vectora_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - vectora_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vectora -d vectora_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    # Keep internal database off public ports (no host port binding)
+
+  redis:
+    image: redis:7-alpine
+    container_name: vectora-redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - vectora_net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: vectora-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "${VECTORa_API_BIND:-0.0.0.0:8000}:8000"
+    environment:
+      DATABASE_URL: postgresql://vectora:vectorapass@postgres:5432/vectora_db
+      REDIS_URL: redis://redis:6379/0
+      SECRET_KEY: ${SECRET_KEY:-change-this-to-a-long-random-secret-key-in-production}
+      ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 15
+      REFRESH_TOKEN_EXPIRE_DAYS: 7
+      MEDIA_STORAGE_PATH: /app/media
+      MODEL_REGISTRY_PATH: /app/models
+      ADULT_MODEL_ARTIFACT: vectora_v3_fp32.onnx
+      MODEL_MANIFEST_PATH: /app/model-registry/manifest.json
+      ENVIRONMENT: production
+      CORS_ORIGINS: '["http://localhost:3000","http://127.0.0.1:3000","http://localhost:3001","http://127.0.0.1:3001"]'
+      MAX_IMAGE_SIZE_MB: 20
+      MAX_VIDEO_SIZE_MB: 100
+      ONNX_INTRA_OP_THREADS: 2
+      ONNX_INTER_OP_THREADS: 1
+      CONCURRENT_INFERENCE_LIMIT: 1
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://ollama:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-gemma3:4b}
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    volumes:
+      - media_storage:/app/media
+      - ./backend/app:/app/app:ro
+      - ./models:/app/models:ro
+      - ./model-registry:/app/model-registry:ro
+    networks:
+      - vectora_net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  video_worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.worker
+    container_name: vectora-video-worker
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://vectora:vectorapass@postgres:5432/vectora_db
+      REDIS_URL: redis://redis:6379/0
+      SECRET_KEY: ${SECRET_KEY:-change-this-to-a-long-random-secret-key-in-production}
+      MEDIA_STORAGE_PATH: /app/media
+      MODEL_REGISTRY_PATH: /app/models
+      ADULT_MODEL_ARTIFACT: vectora_v3_fp32.onnx
+      MODEL_MANIFEST_PATH: /app/model-registry/manifest.json
+      ENVIRONMENT: production
+    volumes:
+      - media_storage:/app/media
+      - ./backend/app:/app/app:ro
+      - ./models:/app/models:ro
+      - ./model-registry:/app/model-registry:ro
+    networks:
+      - vectora_net
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: vectora-web
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "${VECTORa_WEB_BIND:-0.0.0.0:3001}:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    networks:
+      - vectora_net
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/ || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: vectora-ollama
+    restart: "no"
+    profiles:
+      - llm
+    ports:
+      - "127.0.0.1:11435:11434"
+    environment:
+      OLLAMA_NUM_PARALLEL: 1
+      OLLAMA_MAX_LOADED_MODELS: 1
+      OLLAMA_CONTEXT_LENGTH: 4096
+      OLLAMA_MAX_QUEUE: 8
+      OLLAMA_KEEP_ALIVE: 2m
+      OLLAMA_NO_CLOUD: 1
+      OLLAMA_HOST: 0.0.0.0:11434
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - vectora_net
+    deploy:
+      resources:
+        limits:
+          cpus: "3.0"
+          memory: 6G
+        reservations:
+          memory: 2G
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  media_storage:
+    driver: local
+  ollama_data:
+    name: mosqscan_ollama_data
+    external: true
+
+networks:
+  vectora_net:
+    driver: bridge

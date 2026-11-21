@@ -1,0 +1,27 @@
+{
+  "onnxruntime_version": "1.31.1",
+  "cpu": "Intel Core i7-2600 CPU @ 3.40GHz",
+  "threads_intra_op": 2,
+  "threads_inter_op": 1,
+  "concurrent_limit": 1,
+  "warmup_requests": 5,
+  "measured_requests": 25,
+  "median_latency_ms": 377.78,
+  "p95_latency_ms": 543.31,
+  "min_latency_ms": 360.2,
+  "max_latency_ms": 596.93,
+  "server_median_inference_ms": 57,
+  "server_p95_inference_ms": 70,
+  "concurrent_5_requests_handled": true,
+  "ram_usage": {
+    "total_gb": 15.49,
+    "used_gb": 11.71,
+    "available_gb": 3.78,
+    "percent": 75.6
+  },
+  "cpu_load": [
+    1.46,
+    2.05,
+    2.51
+  ]
+}

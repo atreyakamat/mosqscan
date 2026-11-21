@@ -1,0 +1,46 @@
+{
+  "onnx_threads_1": {
+    "threads": 1,
+    "warmup_runs": 10,
+    "benchmark_runs": 100,
+    "median_ms": 40.49,
+    "mean_ms": 43.01,
+    "p95_ms": 56.42,
+    "min_ms": 36.31,
+    "max_ms": 66.3,
+    "std_ms": 6.55,
+    "peak_ram_mb": 485.66
+  },
+  "onnx_threads_2": {
+    "threads": 2,
+    "warmup_runs": 10,
+    "benchmark_runs": 100,
+    "median_ms": 31.87,
+    "mean_ms": 33.01,
+    "p95_ms": 50.74,
+    "min_ms": 21.75,
+    "max_ms": 55.79,
+    "std_ms": 9.43,
+    "peak_ram_mb": 485.66
+  },
+  "onnx_threads_4": {
+    "threads": 4,
+    "warmup_runs": 10,
+    "benchmark_runs": 100,
+    "median_ms": 27.29,
+    "mean_ms": 31.66,
+    "p95_ms": 62.34,
+    "min_ms": 19.47,
+    "max_ms": 92.04,
+    "std_ms": 13.31,
+    "peak_ram_mb": 485.66
+  },
+  "pytorch_python": {
+    "runtime": "PyTorch (Python Interpreter)",
+    "threads": 4,
+    "median_ms": 92.4,
+    "p95_ms": 157.32,
+    "min_ms": 61.24,
+    "max_ms": 186.12
+  }
+}

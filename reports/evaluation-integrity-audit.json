@@ -1,0 +1,2462 @@
+{
+  "exp_A_frozen_baseline": {
+    "checkpoint_path": "experiments/exp_A_frozen_baseline_best.pt",
+    "mode": "frozen",
+    "use_class_weights": false,
+    "best_epoch": 5,
+    "partitions": {
+      "train": {
+        "num_samples": 32,
+        "accuracy": 0.6875,
+        "macro_f1": 0.5208,
+        "per_class": {
+          "aedes": {
+            "precision": 0.6923,
+            "recall": 0.8182,
+            "f1": 0.75,
+            "support": 11
+          },
+          "anopheles": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 7
+          },
+          "culex": {
+            "precision": 0.7222,
+            "recall": 0.9286,
+            "f1": 0.8125,
+            "support": 14
+          }
+        },
+        "confusion_matrix": [
+          [
+            9,
+            1,
+            1
+          ],
+          [
+            3,
+            0,
+            4
+          ],
+          [
+            1,
+            0,
+            13
+          ]
+        ],
+        "specimen_predictions": [
+          {
+            "specimen_id": "Aedes_aegypti_1",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4177,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_10",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.5566,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_11",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4424,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_12",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4085,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_13",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "anopheles",
+            "confidence": 0.373,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Aedes_aegypti_14",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.3952,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Aedes_aegypti_4",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4598,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_5",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.446,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_6",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4951,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_7",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.39,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_9",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4452,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_1",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4879,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_2",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3808,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_3",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3676,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_4",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3638,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_5",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4468,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_6",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4062,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_8",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.3408,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_1",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4338,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_10",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4739,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_12",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5001,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_13",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5366,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_14",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5057,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_15",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5562,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_16",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4563,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_18",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5049,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_2",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5439,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_3",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5905,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_6",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5791,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_7",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5257,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_8",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5639,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_9",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3871,
+            "is_correct": false
+          }
+        ]
+      },
+      "validation": {
+        "num_samples": 6,
+        "accuracy": 0.8333,
+        "macro_f1": 0.6,
+        "per_class": {
+          "aedes": {
+            "precision": 0.6667,
+            "recall": 1.0,
+            "f1": 0.8,
+            "support": 2
+          },
+          "anopheles": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1
+          },
+          "culex": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 3
+          }
+        },
+        "confusion_matrix": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3
+          ]
+        ],
+        "specimen_predictions": [
+          {
+            "specimen_id": "Aedes_aegypti_15",
+            "genus": "aedes",
+            "split": "validation",
+            "predicted_genus": "aedes",
+            "confidence": 0.3793,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_2",
+            "genus": "aedes",
+            "split": "validation",
+            "predicted_genus": "aedes",
+            "confidence": 0.3925,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_9",
+            "genus": "anopheles",
+            "split": "validation",
+            "predicted_genus": "aedes",
+            "confidence": 0.4098,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_11",
+            "genus": "culex",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.4492,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_19",
+            "genus": "culex",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.5577,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_20",
+            "genus": "culex",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.4471,
+            "is_correct": true
+          }
+        ]
+      },
+      "test": {
+        "num_samples": 6,
+        "accuracy": 1.0,
+        "macro_f1": 1.0,
+        "per_class": {
+          "aedes": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 2
+          },
+          "anopheles": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "culex": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 3
+          }
+        },
+        "confusion_matrix": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            3
+          ]
+        ],
+        "specimen_predictions": [
+          {
+            "specimen_id": "Aedes_aegypti_3",
+            "genus": "aedes",
+            "split": "test",
+            "predicted_genus": "aedes",
+            "confidence": 0.4457,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_8",
+            "genus": "aedes",
+            "split": "test",
+            "predicted_genus": "aedes",
+            "confidence": 0.4488,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_7",
+            "genus": "anopheles",
+            "split": "test",
+            "predicted_genus": "anopheles",
+            "confidence": 0.3987,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_17",
+            "genus": "culex",
+            "split": "test",
+            "predicted_genus": "culex",
+            "confidence": 0.4226,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_4",
+            "genus": "culex",
+            "split": "test",
+            "predicted_genus": "culex",
+            "confidence": 0.505,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_5",
+            "genus": "culex",
+            "split": "test",
+            "predicted_genus": "culex",
+            "confidence": 0.3821,
+            "is_correct": true
+          }
+        ]
+      }
+    }
+  },
+  "exp_B_unfreeze_stage7_8": {
+    "checkpoint_path": "experiments/exp_B_unfreeze_stage7_8_best.pt",
+    "mode": "stage7_8",
+    "use_class_weights": false,
+    "best_epoch": 2,
+    "partitions": {
+      "train": {
+        "num_samples": 32,
+        "accuracy": 0.625,
+        "macro_f1": 0.5355,
+        "per_class": {
+          "aedes": {
+            "precision": 0.5882,
+            "recall": 0.9091,
+            "f1": 0.7143,
+            "support": 11
+          },
+          "anopheles": {
+            "precision": 0.3333,
+            "recall": 0.1429,
+            "f1": 0.2,
+            "support": 7
+          },
+          "culex": {
+            "precision": 0.75,
+            "recall": 0.6429,
+            "f1": 0.6923,
+            "support": 14
+          }
+        },
+        "confusion_matrix": [
+          [
+            10,
+            1,
+            0
+          ],
+          [
+            3,
+            1,
+            3
+          ],
+          [
+            4,
+            1,
+            9
+          ]
+        ],
+        "specimen_predictions": [
+          {
+            "specimen_id": "Aedes_aegypti_1",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.442,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_10",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4118,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_11",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4218,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_12",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.399,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_13",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "anopheles",
+            "confidence": 0.3673,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Aedes_aegypti_14",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3818,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_4",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4346,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_5",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.446,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_6",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.429,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_7",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3996,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_9",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.369,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_1",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5048,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_2",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4023,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_3",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.3656,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_4",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3719,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_5",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.3895,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_6",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3883,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_8",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "anopheles",
+            "confidence": 0.393,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_1",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3836,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_10",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.417,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_12",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3384,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_13",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4816,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_14",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3514,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_15",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.437,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_16",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3941,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_18",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.491,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_2",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.447,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_3",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.403,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_6",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4561,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_7",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "anopheles",
+            "confidence": 0.3793,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_8",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5393,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_9",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4538,
+            "is_correct": true
+          }
+        ]
+      },
+      "validation": {
+        "num_samples": 6,
+        "accuracy": 0.8333,
+        "macro_f1": 0.619,
+        "per_class": {
+          "aedes": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 2
+          },
+          "anopheles": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1
+          },
+          "culex": {
+            "precision": 0.75,
+            "recall": 1.0,
+            "f1": 0.8571,
+            "support": 3
+          }
+        },
+        "confusion_matrix": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            3
+          ]
+        ],
+        "specimen_predictions": [
+          {
+            "specimen_id": "Aedes_aegypti_15",
+            "genus": "aedes",
+            "split": "validation",
+            "predicted_genus": "aedes",
+            "confidence": 0.3382,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_2",
+            "genus": "aedes",
+            "split": "validation",
+            "predicted_genus": "aedes",
+            "confidence": 0.3985,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_9",
+            "genus": "anopheles",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.3779,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_11",
+            "genus": "culex",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.4488,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_19",
+            "genus": "culex",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.4609,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_20",
+            "genus": "culex",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.4587,
+            "is_correct": true
+          }
+        ]
+      },
+      "test": {
+        "num_samples": 6,
+        "accuracy": 0.8333,
+        "macro_f1": 0.6,
+        "per_class": {
+          "aedes": {
+            "precision": 0.6667,
+            "recall": 1.0,
+            "f1": 0.8,
+            "support": 2
+          },
+          "anopheles": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1
+          },
+          "culex": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 3
+          }
+        },
+        "confusion_matrix": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3
+          ]
+        ],
+        "specimen_predictions": [
+          {
+            "specimen_id": "Aedes_aegypti_3",
+            "genus": "aedes",
+            "split": "test",
+            "predicted_genus": "aedes",
+            "confidence": 0.4202,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_8",
+            "genus": "aedes",
+            "split": "test",
+            "predicted_genus": "aedes",
+            "confidence": 0.4092,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_7",
+            "genus": "anopheles",
+            "split": "test",
+            "predicted_genus": "aedes",
+            "confidence": 0.3981,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_17",
+            "genus": "culex",
+            "split": "test",
+            "predicted_genus": "culex",
+            "confidence": 0.3537,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_4",
+            "genus": "culex",
+            "split": "test",
+            "predicted_genus": "culex",
+            "confidence": 0.3561,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_5",
+            "genus": "culex",
+            "split": "test",
+            "predicted_genus": "culex",
+            "confidence": 0.3411,
+            "is_correct": true
+          }
+        ]
+      }
+    }
+  },
+  "exp_C_unfreeze_stages5_8": {
+    "checkpoint_path": "experiments/exp_C_unfreeze_stages5_8_best.pt",
+    "mode": "stages5_8",
+    "use_class_weights": false,
+    "best_epoch": 2,
+    "partitions": {
+      "train": {
+        "num_samples": 32,
+        "accuracy": 0.625,
+        "macro_f1": 0.5355,
+        "per_class": {
+          "aedes": {
+            "precision": 0.5882,
+            "recall": 0.9091,
+            "f1": 0.7143,
+            "support": 11
+          },
+          "anopheles": {
+            "precision": 0.3333,
+            "recall": 0.1429,
+            "f1": 0.2,
+            "support": 7
+          },
+          "culex": {
+            "precision": 0.75,
+            "recall": 0.6429,
+            "f1": 0.6923,
+            "support": 14
+          }
+        },
+        "confusion_matrix": [
+          [
+            10,
+            1,
+            0
+          ],
+          [
+            3,
+            1,
+            3
+          ],
+          [
+            4,
+            1,
+            9
+          ]
+        ],
+        "specimen_predictions": [
+          {
+            "specimen_id": "Aedes_aegypti_1",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4415,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_10",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4128,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_11",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4222,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_12",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.399,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_13",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "anopheles",
+            "confidence": 0.3677,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Aedes_aegypti_14",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3816,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_4",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4369,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_5",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4464,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_6",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4298,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_7",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3998,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_9",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3679,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_1",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5061,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_2",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4019,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_3",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.3662,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_4",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3706,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_5",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.3883,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_6",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3878,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_8",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "anopheles",
+            "confidence": 0.3938,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_1",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3824,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_10",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4201,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_12",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3386,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_13",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4878,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_14",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3504,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_15",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4405,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_16",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3929,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_18",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.496,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_2",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4519,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_3",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4078,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_6",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4614,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_7",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "anopheles",
+            "confidence": 0.3768,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_8",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5425,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_9",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4579,
+            "is_correct": true
+          }
+        ]
+      },
+      "validation": {
+        "num_samples": 6,
+        "accuracy": 0.8333,
+        "macro_f1": 0.619,
+        "per_class": {
+          "aedes": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 2
+          },
+          "anopheles": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1
+          },
+          "culex": {
+            "precision": 0.75,
+            "recall": 1.0,
+            "f1": 0.8571,
+            "support": 3
+          }
+        },
+        "confusion_matrix": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            3
+          ]
+        ],
+        "specimen_predictions": [
+          {
+            "specimen_id": "Aedes_aegypti_15",
+            "genus": "aedes",
+            "split": "validation",
+            "predicted_genus": "aedes",
+            "confidence": 0.3381,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_2",
+            "genus": "aedes",
+            "split": "validation",
+            "predicted_genus": "aedes",
+            "confidence": 0.399,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_9",
+            "genus": "anopheles",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.3778,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_11",
+            "genus": "culex",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.4534,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_19",
+            "genus": "culex",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.4659,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_20",
+            "genus": "culex",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.4633,
+            "is_correct": true
+          }
+        ]
+      },
+      "test": {
+        "num_samples": 6,
+        "accuracy": 0.8333,
+        "macro_f1": 0.6,
+        "per_class": {
+          "aedes": {
+            "precision": 0.6667,
+            "recall": 1.0,
+            "f1": 0.8,
+            "support": 2
+          },
+          "anopheles": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1
+          },
+          "culex": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 3
+          }
+        },
+        "confusion_matrix": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3
+          ]
+        ],
+        "specimen_predictions": [
+          {
+            "specimen_id": "Aedes_aegypti_3",
+            "genus": "aedes",
+            "split": "test",
+            "predicted_genus": "aedes",
+            "confidence": 0.4192,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_8",
+            "genus": "aedes",
+            "split": "test",
+            "predicted_genus": "aedes",
+            "confidence": 0.4079,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_7",
+            "genus": "anopheles",
+            "split": "test",
+            "predicted_genus": "aedes",
+            "confidence": 0.3973,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_17",
+            "genus": "culex",
+            "split": "test",
+            "predicted_genus": "culex",
+            "confidence": 0.3549,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_4",
+            "genus": "culex",
+            "split": "test",
+            "predicted_genus": "culex",
+            "confidence": 0.3601,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_5",
+            "genus": "culex",
+            "split": "test",
+            "predicted_genus": "culex",
+            "confidence": 0.345,
+            "is_correct": true
+          }
+        ]
+      }
+    }
+  },
+  "exp_B_weighted_stage7_8": {
+    "checkpoint_path": "experiments/exp_B_weighted_stage7_8_best.pt",
+    "mode": "stage7_8",
+    "use_class_weights": true,
+    "best_epoch": 4,
+    "partitions": {
+      "train": {
+        "num_samples": 32,
+        "accuracy": 0.75,
+        "macro_f1": 0.6722,
+        "per_class": {
+          "aedes": {
+            "precision": 0.6923,
+            "recall": 0.8182,
+            "f1": 0.75,
+            "support": 11
+          },
+          "anopheles": {
+            "precision": 0.6667,
+            "recall": 0.2857,
+            "f1": 0.4,
+            "support": 7
+          },
+          "culex": {
+            "precision": 0.8125,
+            "recall": 0.9286,
+            "f1": 0.8667,
+            "support": 14
+          }
+        },
+        "confusion_matrix": [
+          [
+            9,
+            1,
+            1
+          ],
+          [
+            3,
+            2,
+            2
+          ],
+          [
+            1,
+            0,
+            13
+          ]
+        ],
+        "specimen_predictions": [
+          {
+            "specimen_id": "Aedes_aegypti_1",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4459,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_10",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4858,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_11",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4261,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_12",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4118,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_13",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "anopheles",
+            "confidence": 0.42,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Aedes_aegypti_14",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.3503,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Aedes_aegypti_4",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4682,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_5",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4343,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_6",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4711,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_7",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3909,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_9",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4233,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_1",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4283,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_2",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4031,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_3",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3733,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_4",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "anopheles",
+            "confidence": 0.3649,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_5",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.3999,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_6",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3627,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_8",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "anopheles",
+            "confidence": 0.395,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_1",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.3805,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_10",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4242,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_12",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4026,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_13",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5025,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_14",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4539,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_15",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.572,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_16",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.3824,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_18",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4478,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_2",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5393,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_3",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4794,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_6",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4864,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_7",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.489,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_8",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.486,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_9",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3698,
+            "is_correct": false
+          }
+        ]
+      },
+      "validation": {
+        "num_samples": 6,
+        "accuracy": 0.8333,
+        "macro_f1": 0.6,
+        "per_class": {
+          "aedes": {
+            "precision": 0.6667,
+            "recall": 1.0,
+            "f1": 0.8,
+            "support": 2
+          },
+          "anopheles": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1
+          },
+          "culex": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 3
+          }
+        },
+        "confusion_matrix": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3
+          ]
+        ],
+        "specimen_predictions": [
+          {
+            "specimen_id": "Aedes_aegypti_15",
+            "genus": "aedes",
+            "split": "validation",
+            "predicted_genus": "aedes",
+            "confidence": 0.3543,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_2",
+            "genus": "aedes",
+            "split": "validation",
+            "predicted_genus": "aedes",
+            "confidence": 0.3865,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_9",
+            "genus": "anopheles",
+            "split": "validation",
+            "predicted_genus": "aedes",
+            "confidence": 0.3795,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_11",
+            "genus": "culex",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.3861,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_19",
+            "genus": "culex",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.4914,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_20",
+            "genus": "culex",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.4373,
+            "is_correct": true
+          }
+        ]
+      },
+      "test": {
+        "num_samples": 6,
+        "accuracy": 0.8333,
+        "macro_f1": 0.8222,
+        "per_class": {
+          "aedes": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 2
+          },
+          "anopheles": {
+            "precision": 0.5,
+            "recall": 1.0,
+            "f1": 0.6667,
+            "support": 1
+          },
+          "culex": {
+            "precision": 1.0,
+            "recall": 0.6667,
+            "f1": 0.8,
+            "support": 3
+          }
+        },
+        "confusion_matrix": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            2
+          ]
+        ],
+        "specimen_predictions": [
+          {
+            "specimen_id": "Aedes_aegypti_3",
+            "genus": "aedes",
+            "split": "test",
+            "predicted_genus": "aedes",
+            "confidence": 0.4752,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_8",
+            "genus": "aedes",
+            "split": "test",
+            "predicted_genus": "aedes",
+            "confidence": 0.4583,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_7",
+            "genus": "anopheles",
+            "split": "test",
+            "predicted_genus": "anopheles",
+            "confidence": 0.4343,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_17",
+            "genus": "culex",
+            "split": "test",
+            "predicted_genus": "culex",
+            "confidence": 0.3834,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_4",
+            "genus": "culex",
+            "split": "test",
+            "predicted_genus": "culex",
+            "confidence": 0.4125,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_5",
+            "genus": "culex",
+            "split": "test",
+            "predicted_genus": "anopheles",
+            "confidence": 0.4107,
+            "is_correct": false
+          }
+        ]
+      }
+    }
+  },
+  "exp_C_weighted_stages5_8": {
+    "checkpoint_path": "experiments/exp_C_weighted_stages5_8_best.pt",
+    "mode": "stages5_8",
+    "use_class_weights": true,
+    "best_epoch": 4,
+    "partitions": {
+      "train": {
+        "num_samples": 32,
+        "accuracy": 0.75,
+        "macro_f1": 0.6722,
+        "per_class": {
+          "aedes": {
+            "precision": 0.6923,
+            "recall": 0.8182,
+            "f1": 0.75,
+            "support": 11
+          },
+          "anopheles": {
+            "precision": 0.6667,
+            "recall": 0.2857,
+            "f1": 0.4,
+            "support": 7
+          },
+          "culex": {
+            "precision": 0.8125,
+            "recall": 0.9286,
+            "f1": 0.8667,
+            "support": 14
+          }
+        },
+        "confusion_matrix": [
+          [
+            9,
+            1,
+            1
+          ],
+          [
+            3,
+            2,
+            2
+          ],
+          [
+            1,
+            0,
+            13
+          ]
+        ],
+        "specimen_predictions": [
+          {
+            "specimen_id": "Aedes_aegypti_1",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4465,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_10",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4887,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_11",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4294,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_12",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4127,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_13",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "anopheles",
+            "confidence": 0.4201,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Aedes_aegypti_14",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.3519,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Aedes_aegypti_4",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4728,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_5",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4387,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_6",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4714,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_7",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3947,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_9",
+            "genus": "aedes",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.4242,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_1",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4346,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_2",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3993,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_3",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.367,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_4",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "anopheles",
+            "confidence": 0.3717,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_5",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.3966,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_6",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.3618,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_8",
+            "genus": "anopheles",
+            "split": "train",
+            "predicted_genus": "anopheles",
+            "confidence": 0.3984,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_1",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.3922,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_10",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.437,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_12",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.415,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_13",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5214,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_14",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4659,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_15",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5964,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_16",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.3924,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_18",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4605,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_2",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5553,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_3",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4985,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_6",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.504,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_7",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.5018,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_8",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "culex",
+            "confidence": 0.4965,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_9",
+            "genus": "culex",
+            "split": "train",
+            "predicted_genus": "aedes",
+            "confidence": 0.369,
+            "is_correct": false
+          }
+        ]
+      },
+      "validation": {
+        "num_samples": 6,
+        "accuracy": 0.8333,
+        "macro_f1": 0.6,
+        "per_class": {
+          "aedes": {
+            "precision": 0.6667,
+            "recall": 1.0,
+            "f1": 0.8,
+            "support": 2
+          },
+          "anopheles": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1
+          },
+          "culex": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 3
+          }
+        },
+        "confusion_matrix": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3
+          ]
+        ],
+        "specimen_predictions": [
+          {
+            "specimen_id": "Aedes_aegypti_15",
+            "genus": "aedes",
+            "split": "validation",
+            "predicted_genus": "aedes",
+            "confidence": 0.3542,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_2",
+            "genus": "aedes",
+            "split": "validation",
+            "predicted_genus": "aedes",
+            "confidence": 0.3872,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_9",
+            "genus": "anopheles",
+            "split": "validation",
+            "predicted_genus": "aedes",
+            "confidence": 0.3781,
+            "is_correct": false
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_11",
+            "genus": "culex",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.4011,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_19",
+            "genus": "culex",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.5054,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_20",
+            "genus": "culex",
+            "split": "validation",
+            "predicted_genus": "culex",
+            "confidence": 0.4498,
+            "is_correct": true
+          }
+        ]
+      },
+      "test": {
+        "num_samples": 6,
+        "accuracy": 0.8333,
+        "macro_f1": 0.8222,
+        "per_class": {
+          "aedes": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 2
+          },
+          "anopheles": {
+            "precision": 0.5,
+            "recall": 1.0,
+            "f1": 0.6667,
+            "support": 1
+          },
+          "culex": {
+            "precision": 1.0,
+            "recall": 0.6667,
+            "f1": 0.8,
+            "support": 3
+          }
+        },
+        "confusion_matrix": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            2
+          ]
+        ],
+        "specimen_predictions": [
+          {
+            "specimen_id": "Aedes_aegypti_3",
+            "genus": "aedes",
+            "split": "test",
+            "predicted_genus": "aedes",
+            "confidence": 0.4761,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Aedes_aegypti_8",
+            "genus": "aedes",
+            "split": "test",
+            "predicted_genus": "aedes",
+            "confidence": 0.4588,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Anopheles_stephensi_7",
+            "genus": "anopheles",
+            "split": "test",
+            "predicted_genus": "anopheles",
+            "confidence": 0.4365,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_17",
+            "genus": "culex",
+            "split": "test",
+            "predicted_genus": "culex",
+            "confidence": 0.3909,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_4",
+            "genus": "culex",
+            "split": "test",
+            "predicted_genus": "culex",
+            "confidence": 0.4264,
+            "is_correct": true
+          },
+          {
+            "specimen_id": "Culex_quinquefasciatus_5",
+            "genus": "culex",
+            "split": "test",
+            "predicted_genus": "anopheles",
+            "confidence": 0.4064,
+            "is_correct": false
+          }
+        ]
+      }
+    }
+  }
+}

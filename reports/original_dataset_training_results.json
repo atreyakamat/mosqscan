@@ -1,0 +1,160 @@
+{
+  "timestamp": "2026-11-12T16:26:00Z",
+  "dataset_name": "Mosquito Images Original",
+  "dataset_path": "/home/nimr/Projects/mosqscan/Mosquito Images Original",
+  "inspection_summary": {
+    "total_images": 44,
+    "class_distribution": {
+      "Culex Quinquefasciatus": 20,
+      "Aedes Aegypti": 15,
+      "Anopheles Stephensi": 9
+    },
+    "resolutions": {
+      "3000x4000": 42,
+      "1944x2592": 2
+    },
+    "color_modes": {
+      "RGB": 44
+    },
+    "corrupt_images": 0,
+    "mean_luminance": 196.22,
+    "std_luminance": 16.01
+  },
+  "cross_validation_evaluation": {
+    "method": "StratifiedKFold (4 Folds) with Dynamic Training Augmentation",
+    "validation_protocol": "Untouched physical photographs (unaugmented)",
+    "mean_macro_f1": 0.7799,
+    "sample_std_macro_f1": 0.0775,
+    "mean_balanced_accuracy": 0.7847,
+    "sample_std_balanced_accuracy": 0.0972,
+    "overall_accuracy": 0.8182,
+    "folds": [
+      {
+        "fold": 1,
+        "macro_f1": 0.7554,
+        "balanced_accuracy": 0.75,
+        "accuracy": 0.8182,
+        "supports": {
+          "aedes": 4,
+          "anopheles": 2,
+          "culex": 5
+        },
+        "recall": {
+          "aedes": 0.75,
+          "anopheles": 0.5,
+          "culex": 1.0
+        }
+      },
+      {
+        "fold": 2,
+        "macro_f1": 0.7778,
+        "balanced_accuracy": 0.8333,
+        "accuracy": 0.8182,
+        "supports": {
+          "aedes": 4,
+          "anopheles": 2,
+          "culex": 5
+        },
+        "recall": {
+          "aedes": 0.5,
+          "anopheles": 1.0,
+          "culex": 1.0
+        }
+      },
+      {
+        "fold": 3,
+        "macro_f1": 0.7009,
+        "balanced_accuracy": 0.6667,
+        "accuracy": 0.7273,
+        "supports": {
+          "aedes": 4,
+          "anopheles": 2,
+          "culex": 5
+        },
+        "recall": {
+          "aedes": 0.5,
+          "anopheles": 0.5,
+          "culex": 1.0
+        }
+      },
+      {
+        "fold": 4,
+        "macro_f1": 0.8857,
+        "balanced_accuracy": 0.8889,
+        "accuracy": 0.9091,
+        "supports": {
+          "aedes": 3,
+          "anopheles": 3,
+          "culex": 5
+        },
+        "recall": {
+          "aedes": 1.0,
+          "anopheles": 0.67,
+          "culex": 1.0
+        }
+      }
+    ],
+    "cumulative_confusion_matrix": [
+      [
+        10,
+        3,
+        2
+      ],
+      [
+        1,
+        6,
+        2
+      ],
+      [
+        0,
+        0,
+        20
+      ]
+    ]
+  },
+  "final_model_fit": {
+    "architecture": "efficientnet_b0",
+    "input_resolution": 224,
+    "training_epochs_head": 4,
+    "training_epochs_backbone": 6,
+    "class_weighting": [
+      0.9778,
+      1.6296,
+      0.7333
+    ],
+    "unaugmented_fit_accuracy": 1.0,
+    "unaugmented_fit_macro_f1": 1.0,
+    "confusion_matrix": [
+      [
+        15,
+        0,
+        0
+      ],
+      [
+        0,
+        9,
+        0
+      ],
+      [
+        0,
+        0,
+        20
+      ]
+    ]
+  },
+  "exported_artifacts": {
+    "pytorch_checkpoint": {
+      "path": "/home/nimr/Projects/mosqscan/models/vectora_original_trained.pt",
+      "size_bytes": 16341907,
+      "sha256": "3c06adf10077a3e6f9dc22c3a80cb726aefd7bb7db42728635e08087046390c0"
+    },
+    "onnx_fp32": {
+      "path": "/home/nimr/Projects/mosqscan/models/vectora_original_trained_fp32.onnx",
+      "size_bytes": 16035577,
+      "sha256": "b40b52c06dfe2c84b66b034354ca7f8244ec84807d2b7fba0da9202f4622d04e",
+      "onnx_checker_valid": true,
+      "onnx_runtime_accuracy_on_44_originals": 1.0,
+      "median_cpu_latency_ms": 20.35
+    }
+  }
+}

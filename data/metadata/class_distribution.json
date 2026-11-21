@@ -1,0 +1,26 @@
+{
+  "Aedes": {
+    "original_count": 15,
+    "augmented_count": 900,
+    "verified_count": 783,
+    "high_confidence": 571,
+    "medium_confidence": 212,
+    "low_confidence": 117
+  },
+  "Anopheles": {
+    "original_count": 9,
+    "augmented_count": 540,
+    "verified_count": 522,
+    "high_confidence": 435,
+    "medium_confidence": 87,
+    "low_confidence": 18
+  },
+  "Culex": {
+    "original_count": 20,
+    "augmented_count": 1200,
+    "verified_count": 1120,
+    "high_confidence": 986,
+    "medium_confidence": 134,
+    "low_confidence": 80
+  }
+}

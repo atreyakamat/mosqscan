@@ -1,0 +1,23 @@
+[
+  {
+    "image": "aedes_01.jpg",
+    "predicted_genus": "aedes",
+    "fp32_confidence": 0.5009700059890747,
+    "int8_confidence": 0.3995121717453003,
+    "max_abs_delta": 0.10145783424377441
+  },
+  {
+    "image": "anopheles_01.jpg",
+    "predicted_genus": "aedes",
+    "fp32_confidence": 0.39727485179901123,
+    "int8_confidence": 0.36433738470077515,
+    "max_abs_delta": 0.032937467098236084
+  },
+  {
+    "image": "culex_01.jpg",
+    "predicted_genus": "culex",
+    "fp32_confidence": 0.4961744546890259,
+    "int8_confidence": 0.35496944189071655,
+    "max_abs_delta": 0.1491677314043045
+  }
+]
