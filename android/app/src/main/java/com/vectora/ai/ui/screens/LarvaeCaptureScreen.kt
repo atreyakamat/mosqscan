@@ -1,6 +1,14 @@
 package com.vectora.ai.ui.screens
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.provider.Settings
 import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -9,6 +17,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -18,13 +27,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.vectora.ai.data.local.db.SubmissionDao
 import com.vectora.ai.data.local.db.SubmissionEntity
+import com.vectora.ai.ui.theme.*
 import com.vectora.ai.video.VideoRecordingRules
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -40,8 +54,48 @@ fun LarvaeCaptureScreen(
     onVideoRecorded: (submissionId: String) -> Unit
 ) {
     val context = LocalContext.current
+    val activity = context as? Activity
     val lifecycleOwner = LocalLifecycleOwner.current
     val coroutineScope = rememberCoroutineScope()
+
+    var cameraPermissionGranted by remember {
+        mutableStateOf(
+            ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+        )
+    }
+    var permissionRequestedOnce by remember { mutableStateOf(false) }
+
+    val cameraLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        cameraPermissionGranted = isGranted
+        permissionRequestedOnce = true
+    }
+
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) {
+                cameraPermissionGranted = ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+    }
+
+    LaunchedEffect(Unit) {
+        if (!cameraPermissionGranted) {
+            cameraLauncher.launch(Manifest.permission.CAMERA)
+        }
+    }
+
+    val isPermanentlyDenied = remember(cameraPermissionGranted, permissionRequestedOnce) {
+        if (!cameraPermissionGranted && permissionRequestedOnce && activity != null) {
+            !ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CAMERA)
+        } else {
+            false
+        }
+    }
+
     var isRecording by remember { mutableStateOf(false) }
     var elapsedSeconds by remember { mutableStateOf(0.0f) }
     var recordedDuration by remember { mutableStateOf<Float?>(null) }
@@ -80,12 +134,108 @@ fun LarvaeCaptureScreen(
             )
         }
     ) { paddingValues ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .background(Color.Black)
-        ) {
+        if (!cameraPermissionGranted) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .background(MaterialTheme.colorScheme.background),
+                contentAlignment = Alignment.Center
+            ) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(24.dp),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(24.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(56.dp)
+                                .background(VectoraTealContainer, CircleShape),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Videocam,
+                                contentDescription = null,
+                                tint = VectoraTeal,
+                                modifier = Modifier.size(28.dp)
+                            )
+                        }
+
+                        Text(
+                            text = "Camera Permission Required",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = VectoraSlate900
+                        )
+
+                        Text(
+                            text = "Camera access is needed to record larvae locomotion videos (3.0s – 5.0s) for research.",
+                            fontSize = 13.sp,
+                            color = VectoraSlate700,
+                            lineHeight = 18.sp,
+                            textAlign = TextAlign.Center
+                        )
+
+                        Spacer(modifier = Modifier.height(4.dp))
+
+                        if (isPermanentlyDenied) {
+                            Button(
+                                onClick = {
+                                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                        data = Uri.fromParts("package", context.packageName, null)
+                                    }
+                                    context.startActivity(intent)
+                                },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(48.dp),
+                                shape = RoundedCornerShape(10.dp),
+                                colors = ButtonDefaults.buttonColors(containerColor = VectoraTeal)
+                            ) {
+                                Text("Open Settings", fontWeight = FontWeight.SemiBold)
+                            }
+                        } else {
+                            Button(
+                                onClick = { cameraLauncher.launch(Manifest.permission.CAMERA) },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(48.dp),
+                                shape = RoundedCornerShape(10.dp),
+                                colors = ButtonDefaults.buttonColors(containerColor = VectoraTeal)
+                            ) {
+                                Text("Grant Camera Permission", fontWeight = FontWeight.SemiBold)
+                            }
+                        }
+
+                        OutlinedButton(
+                            onClick = onBack,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(48.dp),
+                            shape = RoundedCornerShape(10.dp)
+                        ) {
+                            Text("Go Back")
+                        }
+                    }
+                }
+            }
+        } else {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .background(Color.Black)
+            ) {
             // CameraX Preview with graceful fallback
             if (cameraAvailable) {
                 AndroidView(
@@ -335,6 +485,7 @@ fun LarvaeCaptureScreen(
                     )
                 }
             }
+        }
         }
     }
 }

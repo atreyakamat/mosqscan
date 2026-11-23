@@ -83,6 +83,14 @@ class KeystoreManager(private val context: Context) {
         return String(decrypted, Charsets.UTF_8)
     }
 
+    fun hasAccessToken(): Boolean {
+        return !getAccessToken().isNullOrBlank()
+    }
+
+    fun clearTokens() {
+        clearCredentials()
+    }
+
     fun clearCredentials() {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         prefs.edit().clear().apply()

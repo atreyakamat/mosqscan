@@ -1,19 +1,19 @@
 {
-  "timestamp": "2026-11-13T11:35:46Z",
+  "timestamp": "2026-11-23T12:55:45Z",
   "base_url": "http://localhost:8000",
   "tests": {
     "test_1_android_upload": {
       "status": "PASSED",
-      "scan_id": "6fbd5f45-f9af-4172-a209-295c408a460d",
+      "scan_id": "27dac7ca-29f5-4cfb-b0d1-51456c632b59",
       "predicted_genus": "aedes",
-      "processing_time_ms": 68,
-      "total_roundtrip_ms": 459.88,
+      "processing_time_ms": 65,
+      "total_roundtrip_ms": 532.97,
       "crop_applied": true
     },
     "test_2_web_upload": {
       "status": "PASSED",
-      "scan_id_crop": "100f22ad-7792-4596-b915-9c69d458b3c4",
-      "scan_id_fallback": "2253a8f3-765a-4d73-a214-18a1a9aadad1",
+      "scan_id_crop": "714e412e-e5e0-40fb-9fa6-7ece3a85935b",
+      "scan_id_fallback": "bc36b972-23f7-476e-8a29-946dead78ae9",
       "crop_mode_1": "manual_specimen_crop",
       "crop_mode_2": "full_image_fallback"
     },
@@ -34,8 +34,8 @@
     },
     "test_5_db_persistence": {
       "status": "PASSED",
-      "db_submission": "6fbd5f45-f9af-4172-a209-295c408a460d | 2c399b66-6498-41d7-9ec0-8f35497b28c3 | completed | adult",
-      "db_result": "aedes           | vectora_v3_fp32.onnx |                 68",
+      "db_submission": "27dac7ca-29f5-4cfb-b0d1-51456c632b59 | 92eb763d-9e41-452c-bc4f-661b1e13c0d0 | completed | adult",
+      "db_result": "aedes           | vectora_v3_fp32.onnx |                 65",
       "media_records_count": 2
     },
     "test_6_user_isolation": {
@@ -51,13 +51,13 @@
     },
     "test_8_backend_restart_persistence": {
       "status": "PASSED",
-      "retrieved_scan_id": "6fbd5f45-f9af-4172-a209-295c408a460d",
+      "retrieved_scan_id": "27dac7ca-29f5-4cfb-b0d1-51456c632b59",
       "retrieved_image_bytes": 2143933
     },
     "test_9_offline_sync_simulation": {
       "status": "PASSED",
-      "local_id": "offline_task_1794569746",
-      "server_scan_id": "0b47d8f3-136f-40cf-99e8-f056665cc7fc",
+      "local_id": "offline_task_1795438545",
+      "server_scan_id": "ec5192cd-ffb1-4676-9be8-08a0f2649809",
       "server_prediction": "anopheles",
       "client_no_local_pred_rule_enforced": true
     },
@@ -83,18 +83,18 @@
     "sample_count": 20,
     "failed_requests": 0,
     "roundtrip_latency_ms": {
-      "min": 393.74,
-      "median_p50": 437.49,
-      "mean": 467.92,
-      "p95": 730.58,
-      "max": 730.58
+      "min": 394.52,
+      "median_p50": 423.14,
+      "mean": 461.31,
+      "p95": 929.44,
+      "max": 929.44
     },
     "onnx_model_inference_ms": {
-      "min": 60,
-      "median_p50": 68,
-      "mean": 70.3,
-      "p95": 130,
-      "max": 130
+      "min": 61,
+      "median_p50": 71,
+      "mean": 78.2,
+      "p95": 225,
+      "max": 225
     }
   },
   "summary": {
@@ -104,7 +104,7 @@
   },
   "assistant_explanation": {
     "status": "SUCCESS",
-    "duration_ms": 98809.88,
-    "response": "```json\n{\n  \"explanation\": \"The model identified the specimen as *Aedes*, likely due to characteristics such as its typically compact body size and presence of distinct scales on the thorax. The raw score of 0.5629 reflects an experimental estimate and does not represent definitive identification. This model is a research pilot and visual identification alone is insufficient. Confirmatory entomological examination, including morphological assessment and potentially PCR analysis, is strongly recommended for accurate species determination.\"\n}\n```"
+    "duration_ms": 105741.34,
+    "response": "```json\n{\n  \"explanation\": \"The model identified the specimen as *Aedes*, likely based on characteristics such as its relatively slender body form and often found presence of white markings. The raw score of 0.5629 reflects an experimental estimate, not definitive identification. This model is a research pilot and visual identification alone is insufficient. Confirmatory entomological examination, including morphological assessment and ideally PCR analysis, is strongly recommended for accurate species determination.\"\n}\n```"
   }
 }

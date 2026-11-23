@@ -171,11 +171,14 @@ fun AdultCropScreen(
                         modifier = Modifier.fillMaxSize()
                     )
 
-                    // Normalized interactive crop box with touch drag
-                    val boxW = containerW * cropSize
-                    val boxH = containerH * cropSize
-                    val offsetX = containerW * cropX
-                    val offsetY = containerH * cropY
+                    // Square crop box matching model input dimensions
+                    val sideDim = minOf(containerW, containerH) * cropSize
+                    val boxW = sideDim
+                    val boxH = sideDim
+                    val maxOffsetX = (containerW - boxW).coerceAtLeast(0.dp)
+                    val maxOffsetY = (containerH - boxH).coerceAtLeast(0.dp)
+                    val offsetX = maxOffsetX * if (1f - cropSize > 0.001f) (cropX / (1f - cropSize)).coerceIn(0f, 1f) else 0f
+                    val offsetY = maxOffsetY * if (1f - cropSize > 0.001f) (cropY / (1f - cropSize)).coerceIn(0f, 1f) else 0f
 
                     Box(
                         modifier = Modifier
@@ -183,7 +186,7 @@ fun AdultCropScreen(
                             .size(width = boxW, height = boxH)
                             .border(2.dp, Color(0xFFFFD54F), MaterialTheme.shapes.small)
                             .background(Color(0xFFFFD54F).copy(alpha = 0.15f))
-                            .pointerInput(cropSize) {
+                            .pointerInput(cropSize, containerW, containerH) {
                                 detectDragGestures { change, dragAmount ->
                                     change.consume()
                                     val deltaXNorm = dragAmount.x / containerW.toPx()
@@ -346,7 +349,7 @@ fun AdultCropScreen(
                                 predictedGenus = null,
                                 confidence = null,
                                 isUncertain = true,
-                                modelVersion = "vectora-2.2",
+                                modelVersion = "3.0.0",
                                 processingTimeMs = null,
                                 createdAt = System.currentTimeMillis(),
                                 synced = false,

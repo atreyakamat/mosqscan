@@ -4,7 +4,10 @@ import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
 sealed class Screen(val route: String) {
-    data object Dashboard : Screen("dashboard")
+    data object Splash : Screen("splash")
+    data object PermissionSetup : Screen("permission_setup")
+    data object Main : Screen("main")
+    data object Dashboard : Screen("main")
     data object AdultCapture : Screen("adult_capture")
     data object AdultCrop : Screen("adult_crop/{imagePath}") {
         fun createRoute(imagePath: String): String {
@@ -22,4 +25,6 @@ sealed class Screen(val route: String) {
     data object History : Screen("history")
     data object Settings : Screen("settings")
     data object Auth : Screen("auth")
+    data object Onboarding : Screen("onboarding")
+    data object Assistant : Screen("assistant")
 }

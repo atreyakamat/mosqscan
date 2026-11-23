@@ -44,7 +44,10 @@ interface SubmissionDao {
             isUncertain = :isUncertain,
             modelVersion = :modelVersion,
             modelStatus = :modelStatus,
-            processingTimeMs = :processingTimeMs
+            processingTimeMs = :processingTimeMs,
+            scoreAedes = :scoreAedes,
+            scoreAnopheles = :scoreAnopheles,
+            scoreCulex = :scoreCulex
         WHERE id = :id
     """)
     suspend fun updateWithRemoteResult(
@@ -56,6 +59,12 @@ interface SubmissionDao {
         isUncertain: Boolean,
         modelVersion: String,
         modelStatus: String?,
-        processingTimeMs: Long?
+        processingTimeMs: Long?,
+        scoreAedes: Float? = null,
+        scoreAnopheles: Float? = null,
+        scoreCulex: Float? = null
     )
+
+    @Query("UPDATE submissions SET aiExplanation = :explanation WHERE id = :id")
+    suspend fun updateAiExplanation(id: String, explanation: String)
 }

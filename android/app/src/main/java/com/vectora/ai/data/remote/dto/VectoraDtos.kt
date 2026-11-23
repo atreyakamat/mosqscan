@@ -79,3 +79,47 @@ data class ModelHealthResponse(
     @SerializedName("checksum_verified") val checksumVerified: Boolean,
     @SerializedName("actual_sha256") val actualSha256: String? = null
 )
+
+// --- Local AI Assistant DTOs (Gemma 3:4B) ---
+
+data class AssistantHealthResponse(
+    val status: String,
+    @SerializedName("ollama_base_url") val ollamaBaseUrl: String,
+    @SerializedName("target_model") val targetModel: String,
+    @SerializedName("model_loaded") val modelLoaded: Boolean,
+    @SerializedName("available_models") val availableModels: List<String> = emptyList(),
+    val guardrail: String? = null
+)
+
+data class AssistantQueryRequest(
+    val prompt: String,
+    @SerializedName("system_prompt") val systemPrompt: String? = null,
+    val temperature: Float = 0.2f,
+    @SerializedName("json_mode") val jsonMode: Boolean = false
+)
+
+data class ExplainResultRequest(
+    val genus: String,
+    @SerializedName("raw_scores") val rawScores: Map<String, Float>? = null,
+    @SerializedName("scan_id") val scanId: String? = null,
+    @SerializedName("quality_feedback") val qualityFeedback: Map<String, Any>? = null
+)
+
+data class AssistantResponse(
+    val success: Boolean,
+    val response: String,
+    @SerializedName("processing_time_seconds") val processingTimeSeconds: Float? = null,
+    val model: String? = null,
+    val error: String? = null
+)
+
+// --- Dashboard & Submissions DTOs ---
+
+data class DashboardStatsDto(
+    @SerializedName("total_submissions") val totalSubmissions: Int,
+    @SerializedName("adult_submissions") val adultSubmissions: Int,
+    @SerializedName("larvae_submissions") val larvaeSubmissions: Int,
+    @SerializedName("successful_identifications") val successfulIdentifications: Int,
+    @SerializedName("uncertain_identifications") val uncertainIdentifications: Int,
+    @SerializedName("failed_submissions") val failedSubmissions: Int
+)

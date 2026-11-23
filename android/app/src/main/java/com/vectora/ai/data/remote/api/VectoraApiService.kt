@@ -41,4 +41,22 @@ interface VectoraApiService {
     suspend fun getAdultSubmission(
         @Path("id") id: String
     ): Response<AdultSubmissionResponse>
+
+    // Local Gemma 3:4B AI Assistant Endpoints
+    @GET("api/v1/assistant/health")
+    suspend fun assistantHealth(): Response<AssistantHealthResponse>
+
+    @POST("api/v1/assistant/chat")
+    suspend fun chatAssistant(
+        @Body request: AssistantQueryRequest
+    ): Response<AssistantResponse>
+
+    @POST("api/v1/assistant/explain-result")
+    suspend fun explainResult(
+        @Body request: ExplainResultRequest
+    ): Response<AssistantResponse>
+
+    // Dashboard Statistics
+    @GET("api/v1/dashboard/stats")
+    suspend fun getDashboardStats(): Response<DashboardStatsDto>
 }

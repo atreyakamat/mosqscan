@@ -23,5 +23,9 @@ data class SubmissionEntity(
     val cropX: Float? = null,
     val cropY: Float? = null,
     val cropW: Float? = null,
-    val cropH: Float? = null
+    val cropH: Float? = null,
+    val scoreAedes: Float? = null,
+    val scoreAnopheles: Float? = null,
+    val scoreCulex: Float? = null,
+    val aiExplanation: String? = null
 )

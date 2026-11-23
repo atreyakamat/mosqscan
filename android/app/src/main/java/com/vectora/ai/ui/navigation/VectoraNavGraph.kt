@@ -35,19 +35,46 @@ fun VectoraNavGraph(
 
     NavHost(
         navController = navController,
-        startDestination = Screen.Dashboard.route
+        startDestination = Screen.Splash.route
     ) {
-        composable(Screen.Dashboard.route) {
-            DashboardScreen(
-                submissionDao = activeDao,
+        // Startup Screen: Minimal splash screen with Vectora AI logo and name
+        composable(Screen.Splash.route) {
+            SplashScreen(
+                onNavigateNext = {
+                    val nextRoute = if (serverClientManager.isPermissionSetupCompleted) {
+                        Screen.Main.route
+                    } else {
+                        Screen.PermissionSetup.route
+                    }
+                    navController.navigate(nextRoute) {
+                        popUpTo(Screen.Splash.route) { inclusive = true }
+                    }
+                }
+            )
+        }
+
+        // Permission Setup Screen
+        composable(Screen.PermissionSetup.route) {
+            PermissionScreen(
                 serverClientManager = serverClientManager,
+                onContinue = {
+                    navController.navigate(Screen.Main.route) {
+                        popUpTo(Screen.PermissionSetup.route) { inclusive = true }
+                    }
+                }
+            )
+        }
+
+        // Main Screen: Exactly two options (Adult Mosquito and Mosquito Larvae)
+        composable(Screen.Main.route) {
+            MainScreen(
                 onNavigateToAdultCapture = { navController.navigate(Screen.AdultCapture.route) },
                 onNavigateToLarvaeCapture = { navController.navigate(Screen.LarvaeCapture.route) },
-                onNavigateToHistory = { navController.navigate(Screen.History.route) },
                 onNavigateToSettings = { navController.navigate(Screen.Settings.route) }
             )
         }
 
+        // Adult Specimen Capture Screen (CameraX + Photo Picker)
         composable(Screen.AdultCapture.route) {
             AdultCaptureScreen(
                 cacheDir = context.cacheDir,
@@ -58,6 +85,7 @@ fun VectoraNavGraph(
             )
         }
 
+        // Adult Specimen Manual Crop Screen
         composable(
             route = Screen.AdultCrop.route,
             arguments = listOf(navArgument("imagePath") { type = NavType.StringType })
@@ -79,6 +107,7 @@ fun VectoraNavGraph(
             )
         }
 
+        // Adult Specimen Inference Upload Screen
         composable(
             route = Screen.AdultUpload.route,
             arguments = listOf(navArgument("submissionId") { type = NavType.StringType })
@@ -90,12 +119,12 @@ fun VectoraNavGraph(
                 serverClientManager = serverClientManager,
                 onUploadSuccess = { id ->
                     navController.navigate(Screen.Result.createRoute(id)) {
-                        popUpTo(Screen.Dashboard.route)
+                        popUpTo(Screen.Main.route)
                     }
                 },
                 onCancelToDashboard = {
-                    navController.navigate(Screen.Dashboard.route) {
-                        popUpTo(Screen.Dashboard.route) { inclusive = true }
+                    navController.navigate(Screen.Main.route) {
+                        popUpTo(Screen.Main.route) { inclusive = true }
                     }
                 },
                 onNavigateToAuth = {
@@ -104,18 +133,20 @@ fun VectoraNavGraph(
             )
         }
 
+        // Mosquito Larvae Capture Screen (Strict 3-5s limit, research-only)
         composable(Screen.LarvaeCapture.route) {
             LarvaeCaptureScreen(
                 submissionDao = activeDao,
                 onBack = { navController.popBackStack() },
                 onVideoRecorded = { id ->
                     navController.navigate(Screen.Result.createRoute(id)) {
-                        popUpTo(Screen.Dashboard.route)
+                        popUpTo(Screen.Main.route)
                     }
                 }
             )
         }
 
+        // Minimal Result Screen
         composable(
             route = Screen.Result.route,
             arguments = listOf(navArgument("submissionId") { type = NavType.StringType })
@@ -124,22 +155,42 @@ fun VectoraNavGraph(
             ResultScreen(
                 submissionId = subId,
                 submissionDao = activeDao,
+                serverClientManager = serverClientManager,
                 onBackToDashboard = {
-                    navController.navigate(Screen.Dashboard.route) {
-                        popUpTo(Screen.Dashboard.route) { inclusive = true }
+                    navController.navigate(Screen.Main.route) {
+                        popUpTo(Screen.Main.route) { inclusive = true }
                     }
                 },
-                onNavigateToHistory = {
-                    navController.navigate(Screen.History.route) {
-                        popUpTo(Screen.Dashboard.route)
-                    }
-                },
+                onNavigateToHistory = null,
                 onRetryUpload = { id ->
                     navController.navigate(Screen.AdultUpload.createRoute(id))
                 }
             )
         }
 
+        // Settings Screen
+        composable(Screen.Settings.route) {
+            SettingsScreen(
+                onBack = { navController.popBackStack() },
+                onNavigateToAuth = { navController.navigate(Screen.Auth.route) },
+                onNavigateToOnboarding = { navController.navigate(Screen.PermissionSetup.route) },
+                keystoreManager = keystore,
+                serverClientManager = serverClientManager,
+                submissionDao = activeDao
+            )
+        }
+
+        // Authentication Screen
+        composable(Screen.Auth.route) {
+            AuthScreen(
+                keystoreManager = keystore,
+                serverClientManager = serverClientManager,
+                onBack = { navController.popBackStack() },
+                onAuthSuccess = { navController.popBackStack() }
+            )
+        }
+
+        // History Screen (accessible if needed)
         composable(Screen.History.route) {
             HistoryScreen(
                 submissionDao = activeDao,
@@ -147,24 +198,6 @@ fun VectoraNavGraph(
                 onSelectSubmission = { id ->
                     navController.navigate(Screen.Result.createRoute(id))
                 }
-            )
-        }
-
-        composable(Screen.Settings.route) {
-            SettingsScreen(
-                onBack = { navController.popBackStack() },
-                onNavigateToAuth = { navController.navigate(Screen.Auth.route) },
-                keystoreManager = keystore,
-                serverClientManager = serverClientManager
-            )
-        }
-
-        composable(Screen.Auth.route) {
-            AuthScreen(
-                keystoreManager = keystore,
-                serverClientManager = serverClientManager,
-                onBack = { navController.popBackStack() },
-                onAuthSuccess = { navController.popBackStack() }
             )
         }
     }

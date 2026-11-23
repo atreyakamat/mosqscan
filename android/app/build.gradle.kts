@@ -16,7 +16,7 @@ android {
     defaultConfig {
         applicationId = "com.vectora.ai"
         minSdk = 29
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 300
         versionName = "3.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

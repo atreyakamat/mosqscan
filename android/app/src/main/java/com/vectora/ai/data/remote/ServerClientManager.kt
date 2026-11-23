@@ -18,10 +18,20 @@ class ServerClientManager(
     companion object {
         private const val PREFS_NAME = "vectora_server_prefs"
         private const val KEY_SERVER_URL = "vectora_api_base_url"
+        private const val KEY_ONBOARDING_COMPLETED = "vectora_onboarding_completed"
+        private const val KEY_PERMISSION_SETUP_COMPLETED = "vectora_permission_setup_completed"
         val DEFAULT_SERVER_URL: String = com.vectora.ai.BuildConfig.API_BASE_URL
     }
 
     private val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
+    var isPermissionSetupCompleted: Boolean
+        get() = prefs.getBoolean(KEY_PERMISSION_SETUP_COMPLETED, false)
+        set(value) = prefs.edit().putBoolean(KEY_PERMISSION_SETUP_COMPLETED, value).apply()
+
+    var isOnboardingCompleted: Boolean
+        get() = prefs.getBoolean(KEY_ONBOARDING_COMPLETED, false)
+        set(value) = prefs.edit().putBoolean(KEY_ONBOARDING_COMPLETED, value).apply()
 
     var baseUrl: String
         get() {
@@ -49,9 +59,9 @@ class ServerClientManager(
             }
 
             val okHttpClient = OkHttpClient.Builder()
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(180, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
                 .addInterceptor(AuthInterceptor(keystoreManager))
                 .addInterceptor(logging)
                 .build()
@@ -97,6 +107,24 @@ class ServerClientManager(
                 Result.success(statusMsg)
             } else {
                 Result.failure(Exception("HTTP ${resp.code()}: ${resp.message()}"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun checkAssistantHealth(): Result<String> {
+        return try {
+            val resp = getService().assistantHealth()
+            if (resp.isSuccessful) {
+                val body = resp.body()
+                if (body?.status == "healthy") {
+                    Result.success("Gemma 3:4B Online (${body.targetModel})")
+                } else {
+                    Result.failure(Exception("Assistant: ${body?.status ?: "offline"}"))
+                }
+            } else {
+                Result.failure(Exception("HTTP ${resp.code()}"))
             }
         } catch (e: Exception) {
             Result.failure(e)

@@ -2,6 +2,7 @@ package com.vectora.ai.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -13,8 +14,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.vectora.ai.data.local.db.SubmissionDao
 import com.vectora.ai.data.local.keystore.KeystoreManager
 import com.vectora.ai.data.remote.ServerClientManager
+import com.vectora.ai.sync.SyncManager
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -22,8 +25,10 @@ import kotlinx.coroutines.launch
 fun SettingsScreen(
     onBack: () -> Unit,
     onNavigateToAuth: () -> Unit = {},
+    onNavigateToOnboarding: () -> Unit = {},
     keystoreManager: KeystoreManager? = null,
-    serverClientManager: ServerClientManager? = null
+    serverClientManager: ServerClientManager? = null,
+    submissionDao: SubmissionDao? = null
 ) {
     val coroutineScope = rememberCoroutineScope()
 
@@ -36,6 +41,20 @@ fun SettingsScreen(
 
     var modelHealthResult by remember { mutableStateOf<String?>(null) }
     var isCheckingModelHealth by remember { mutableStateOf(false) }
+
+    var assistantHealthResult by remember { mutableStateOf<String?>(null) }
+    var isCheckingAssistantHealth by remember { mutableStateOf(false) }
+
+    var pendingUploadCount by remember { mutableIntStateOf(0) }
+    var isSyncing by remember { mutableStateOf(false) }
+    var syncResultText by remember { mutableStateOf<String?>(null) }
+
+    LaunchedEffect(submissionDao) {
+        if (submissionDao != null) {
+            val syncMgr = SyncManager(submissionDao)
+            pendingUploadCount = syncMgr.getPendingSyncCount()
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -57,6 +76,59 @@ fun SettingsScreen(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            // Account Section Card
+            Card(modifier = Modifier.fillMaxWidth()) {
+                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.AccountCircle, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text("User Account", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    }
+                    Divider()
+
+                    val hasToken = keystoreManager?.hasAccessToken() == true
+                    Text(
+                        if (hasToken) "Active authenticated session. Tokens encrypted with Android Keystore."
+                        else "No active session on this device. Sign in to sync your scans to the central database.",
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        if (hasToken) {
+                            OutlinedButton(
+                                onClick = {
+                                    keystoreManager?.clearTokens()
+                                },
+                                shape = RoundedCornerShape(8.dp)
+                            ) {
+                                Icon(Icons.Default.Logout, contentDescription = null, modifier = Modifier.size(16.dp))
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text("Sign Out")
+                            }
+                        } else {
+                            Button(
+                                onClick = onNavigateToAuth,
+                                shape = RoundedCornerShape(8.dp)
+                            ) {
+                                Icon(Icons.Default.Login, contentDescription = null, modifier = Modifier.size(16.dp))
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text("Sign In / Register")
+                            }
+                        }
+
+                        OutlinedButton(
+                            onClick = onNavigateToOnboarding,
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            Icon(Icons.Default.RestartAlt, contentDescription = null, modifier = Modifier.size(16.dp))
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("Re-run Setup Wizard")
+                        }
+                    }
+                }
+            }
+
             // Server Network Configuration Card
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(
@@ -71,7 +143,7 @@ fun SettingsScreen(
                     Divider()
 
                     Text(
-                        "Configure the IP address or hostname of your central i7-2600 AI server.",
+                        "Configure the central i7-2600 AI server IP address or hostname. Physical tablets connect via LAN IP.",
                         fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -84,7 +156,7 @@ fun SettingsScreen(
                             connectionTestResult = null
                             connectionTestSuccess = null
                         },
-                        label = { Text("Server Base URL (VECTORa_API_BASE_URL)") },
+                        label = { Text("Server Base URL") },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -106,172 +178,228 @@ fun SettingsScreen(
                                         connectionTestResult = result.getOrNull()
                                     } else {
                                         connectionTestSuccess = false
-                                        connectionTestResult = result.exceptionOrNull()?.message ?: "Unreachable"
+                                        connectionTestResult = "Failed: ${result.exceptionOrNull()?.message}"
                                     }
                                 }
                             },
-                            enabled = !isTestingConnection,
+                            shape = RoundedCornerShape(8.dp),
                             modifier = Modifier.weight(1f)
                         ) {
                             if (isTestingConnection) {
                                 CircularProgressIndicator(modifier = Modifier.size(16.dp), color = Color.White)
-                                Spacer(modifier = Modifier.width(4.dp))
-                                Text("Testing...", fontSize = 12.sp)
                             } else {
-                                Icon(Icons.Default.NetworkCheck, contentDescription = null, modifier = Modifier.size(16.dp))
-                                Spacer(modifier = Modifier.width(4.dp))
-                                Text("Test Connection", fontSize = 12.sp)
+                                Text("Test Connection")
                             }
                         }
 
-                        OutlinedButton(
-                            onClick = {
-                                if (serverClientManager == null) return@OutlinedButton
-                                isCheckingModelHealth = true
-                                modelHealthResult = null
-                                coroutineScope.launch {
-                                    val result = serverClientManager.checkModelHealth()
-                                    isCheckingModelHealth = false
-                                    modelHealthResult = if (result.isSuccess) {
-                                        result.getOrNull()
-                                    } else {
-                                        "Check failed: ${result.exceptionOrNull()?.message}"
-                                    }
-                                }
-                            },
-                            enabled = !isCheckingModelHealth,
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            if (isCheckingModelHealth) {
-                                CircularProgressIndicator(modifier = Modifier.size(16.dp))
-                            } else {
-                                Text("Model Health", fontSize = 12.sp)
-                            }
-                        }
-                    }
-
-                    // Test Results Display
-                    connectionTestResult?.let { res ->
-                        Surface(
-                            color = if (connectionTestSuccess == true) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.errorContainer,
-                            shape = MaterialTheme.shapes.small,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Row(modifier = Modifier.padding(10.dp), verticalAlignment = Alignment.CenterVertically) {
-                                Icon(
-                                    if (connectionTestSuccess == true) Icons.Default.CheckCircle else Icons.Default.Error,
-                                    contentDescription = null,
-                                    tint = if (connectionTestSuccess == true) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
-                                    modifier = Modifier.size(18.dp)
-                                )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text(res, fontSize = 12.sp)
-                            }
-                        }
-                    }
-
-                    modelHealthResult?.let { mRes ->
-                        Surface(
-                            color = MaterialTheme.colorScheme.secondaryContainer,
-                            shape = MaterialTheme.shapes.small,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text(mRes, fontSize = 11.sp, modifier = Modifier.padding(10.dp))
-                        }
-                    }
-                }
-            }
-
-            // Server-Hosted AI Architecture Card
-            Card(modifier = Modifier.fillMaxWidth()) {
-                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Default.Memory, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text("Active Server-Hosted AI Engine", fontWeight = FontWeight.Bold, fontSize = 14.sp)
-                    }
-                    Divider()
-
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                        Text("Architecture", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Text("Remote Server Inference (CPU)", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
-                    }
-
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                        Text("Host Processor", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Text("Intel Core i7-2600 (4C / 8T)", fontSize = 12.sp)
-                    }
-
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                        Text("Active Model", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Text("Exp B FP32 ONNX Candidate", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
-                    }
-
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                        Text("Certainty Threshold", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Text("65% (Strict Heuristic)", fontSize = 12.sp)
-                    }
-
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                        Text("Model Status", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Text("EXPERIMENTAL_NOT_FIELD_VALIDATED", fontSize = 11.sp, color = MaterialTheme.colorScheme.error)
-                    }
-                }
-            }
-
-            // Authentication & Keystore Card
-            Card(modifier = Modifier.fillMaxWidth()) {
-                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("Authentication & Keystore", fontWeight = FontWeight.Bold, fontSize = 14.sp)
-                    Divider()
-
-                    val hasToken = try {
-                        keystoreManager?.getAccessToken() != null
-                    } catch (_: Exception) {
-                        false
-                    }
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text("Account Status", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Text(
-                            if (hasToken) "Authenticated" else "Guest / Unauthenticated",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = if (hasToken) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
-                        )
-                    }
-
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                        Text("Token Storage", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Text("Android Keystore (AES-256-GCM)", fontSize = 11.sp, fontWeight = FontWeight.SemiBold)
-                    }
-
-                    Spacer(modifier = Modifier.height(4.dp))
-                    if (hasToken) {
-                        OutlinedButton(
-                            onClick = {
-                                try {
-                                    keystoreManager?.clearCredentials()
-                                } catch (_: Exception) {}
-                            },
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text("Sign Out (Clear Saved Token)")
-                        }
-                    } else {
                         Button(
-                            onClick = onNavigateToAuth,
+                            onClick = {
+                                serverUrlInput = "http://192.168.1.120:8000"
+                                serverClientManager?.baseUrl = serverUrlInput
+                                connectionTestResult = null
+                                connectionTestSuccess = null
+                            },
+                            colors = ButtonDefaults.outlinedButtonColors(),
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            Text("Reset i7 LAN", fontSize = 12.sp)
+                        }
+                    }
+
+                    connectionTestResult?.let { msg ->
+                        Surface(
+                            color = if (connectionTestSuccess == true) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.errorContainer,
+                            shape = RoundedCornerShape(8.dp),
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            Text("Sign In / Register")
+                            Text(
+                                msg,
+                                fontSize = 12.sp,
+                                modifier = Modifier.padding(10.dp),
+                                color = if (connectionTestSuccess == true) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onErrorContainer
+                            )
                         }
                     }
                 }
             }
+
+            // Offline Sync Manager Card
+            Card(modifier = Modifier.fillMaxWidth()) {
+                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.Sync, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text("Offline Queue & Synchronization", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    }
+                    Divider()
+
+                    Text(
+                        "Pending offline uploads: $pendingUploadCount submission(s).",
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+
+                    Button(
+                        onClick = {
+                            if (submissionDao == null || serverClientManager == null) return@Button
+                            isSyncing = true
+                            syncResultText = null
+                            coroutineScope.launch {
+                                val syncMgr = SyncManager(submissionDao)
+                                val res = syncMgr.syncAllPending(serverClientManager)
+                                pendingUploadCount = syncMgr.getPendingSyncCount()
+                                isSyncing = false
+                                syncResultText = "Sync completed: ${res.syncedCount} uploaded, ${res.failedCount} failed."
+                            }
+                        },
+                        enabled = !isSyncing && pendingUploadCount > 0,
+                        shape = RoundedCornerShape(8.dp)
+                    ) {
+                        if (isSyncing) {
+                            CircularProgressIndicator(modifier = Modifier.size(16.dp), color = Color.White)
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text("Syncing with i7 server...")
+                        } else {
+                            Icon(Icons.Default.CloudUpload, contentDescription = null, modifier = Modifier.size(16.dp))
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("Sync Now ($pendingUploadCount)")
+                        }
+                    }
+
+                    syncResultText?.let { txt ->
+                        Text(txt, fontSize = 12.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
+                    }
+                }
+            }
+
+            // Model Health & Checksum Verification Card
+            Card(modifier = Modifier.fillMaxWidth()) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.Security, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text("Production Model Protection", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    }
+                    Divider()
+
+                    Text(
+                        "Active Model: models/vectora_v3_fp32.onnx\n" +
+                        "Expected SHA-256: c3a3656f746a1bb2e7ac428e44670d89cf51f0d0f923ad3aa15420e8a4592cfa\n" +
+                        "Class Mapping: 0: Aedes, 1: Anopheles, 2: Culex",
+                        fontSize = 11.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        lineHeight = 15.sp
+                    )
+
+                    Button(
+                        onClick = {
+                            if (serverClientManager == null) return@Button
+                            isCheckingModelHealth = true
+                            modelHealthResult = null
+                            coroutineScope.launch {
+                                val result = serverClientManager.checkModelHealth()
+                                isCheckingModelHealth = false
+                                modelHealthResult = if (result.isSuccess) {
+                                    result.getOrNull()
+                                } else {
+                                    "Failed: ${result.exceptionOrNull()?.message}"
+                                }
+                            }
+                        },
+                        shape = RoundedCornerShape(8.dp)
+                    ) {
+                        if (isCheckingModelHealth) {
+                            CircularProgressIndicator(modifier = Modifier.size(16.dp), color = Color.White)
+                        } else {
+                            Text("Verify Model Checksum via API")
+                        }
+                    }
+
+                    modelHealthResult?.let { msg ->
+                        Surface(
+                            color = MaterialTheme.colorScheme.surfaceVariant,
+                            shape = RoundedCornerShape(8.dp),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(msg, fontSize = 11.sp, modifier = Modifier.padding(10.dp))
+                        }
+                    }
+                }
+            }
+
+            // Local AI Assistant Status Card
+            Card(modifier = Modifier.fillMaxWidth()) {
+                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.Psychology, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text("Local AI Assistant (Gemma 3:4B)", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    }
+                    Divider()
+
+                    Text(
+                        "Ollama service running on Intel Core i7-2600 host. Provides plain-language explanations of specimen scans.",
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+
+                    Button(
+                        onClick = {
+                            if (serverClientManager == null) return@Button
+                            isCheckingAssistantHealth = true
+                            assistantHealthResult = null
+                            coroutineScope.launch {
+                                val result = serverClientManager.checkAssistantHealth()
+                                isCheckingAssistantHealth = false
+                                assistantHealthResult = if (result.isSuccess) {
+                                    result.getOrNull()
+                                } else {
+                                    "Offline / Unavailable: ${result.exceptionOrNull()?.message}"
+                                }
+                            }
+                        },
+                        shape = RoundedCornerShape(8.dp)
+                    ) {
+                        if (isCheckingAssistantHealth) {
+                            CircularProgressIndicator(modifier = Modifier.size(16.dp), color = Color.White)
+                        } else {
+                            Text("Check Gemma 3:4B Status")
+                        }
+                    }
+
+                    assistantHealthResult?.let { res ->
+                        Surface(
+                            color = MaterialTheme.colorScheme.surfaceVariant,
+                            shape = RoundedCornerShape(8.dp),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(res, fontSize = 11.sp, modifier = Modifier.padding(10.dp))
+                        }
+                    }
+                }
+            }
+
+            // About & Disclaimers Card
+            Card(modifier = Modifier.fillMaxWidth()) {
+                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text("Application Information", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    Divider()
+                    Text("Vectora AI Android Client v3.0.0 (Build 300)", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                    Text("Target Device: Samsung Galaxy Tab A7 Lite (SM-T225, Android 14)", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(
+                        "Status: EXPERIMENTAL_NOT_FIELD_VALIDATED\n" +
+                        "This application provides research-grade genus classification. It is not approved for clinical diagnostic, pathogen detection, or public health vector intervention deployment.",
+                        fontSize = 11.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        lineHeight = 14.sp
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
         }
     }
 }

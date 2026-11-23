@@ -1,0 +1,148 @@
+{
+  "timestamp": "2026-11-23T09:18:07Z",
+  "base_url": "http://localhost:8000",
+  "system_environment": {
+    "host_cpu": "Intel(R) Core(TM) i7-2600 CPU @ 3.40GHz",
+    "host_memory_gb": 16,
+    "host_os": "Linux 6.18.2-arch2-1 (Omarchy Linux x86_64)",
+    "host_lan_ip": "192.168.1.120",
+    "android_target": "Samsung Galaxy Tab A7 Lite (SM-T225, Android 14)",
+    "model_artifact": "models/vectora_v3_fp32.onnx",
+    "model_sha256": "c3a3656f746a1bb2e7ac428e44670d89cf51f0d0f923ad3aa15420e8a4592cfa",
+    "model_classes": {
+      "0": "aedes",
+      "1": "anopheles",
+      "2": "culex"
+    },
+    "scientific_status": "EXPERIMENTAL_NOT_FIELD_VALIDATED",
+    "larvae_classifier": "model_not_validated (research-isolated)"
+  },
+  "tests": {
+    "test_1_android_upload": {
+      "status": "PASSED",
+      "description": "Android multipart image upload with normalized crop coordinates (0.15, 0.15, 0.70, 0.70)",
+      "scan_id": "fe218d5c-25fb-479d-81c7-8e8d7f78edf5",
+      "predicted_genus": "aedes",
+      "processing_time_ms": 83,
+      "total_roundtrip_ms": 828.39,
+      "crop_applied": true,
+      "crop_mode": "manual_specimen_crop"
+    },
+    "test_2_web_upload": {
+      "status": "PASSED",
+      "description": "Web image upload with crop_box JSON and full image fallback",
+      "scan_id_crop": "5c6ebc1b-6af5-4ad2-b144-ed0d96965c95",
+      "scan_id_fallback": "74d31b1c-61cf-4446-81be-7272e18d11d9",
+      "crop_mode_1": "manual_specimen_crop",
+      "crop_mode_2": "full_image_fallback"
+    },
+    "test_3_class_mapping": {
+      "status": "PASSED",
+      "description": "Strict verification of ONNX model class order 0: Aedes, 1: Anopheles, 2: Culex",
+      "classes_index_map": {
+        "0": "aedes",
+        "1": "anopheles",
+        "2": "culex"
+      },
+      "verified_in_inference_scores": true
+    },
+    "test_4_structured_schema": {
+      "status": "PASSED",
+      "description": "Validation of all 10 required schema fields, disclaimer, and manual inspection recommendation",
+      "evaluation_status": "EXPERIMENTAL_NOT_FIELD_VALIDATED",
+      "model_checksum": "c3a3656f746a1bb2e7ac428e44670d89cf51f0d0f923ad3aa15420e8a4592cfa",
+      "review_recommendation": "MANUAL_ENTOMOLOGICAL_INSPECTION_REQUIRED",
+      "fields_validated": [
+        "scan_id",
+        "predicted_genus",
+        "raw_class_scores",
+        "raw_score",
+        "model_version",
+        "model_checksum",
+        "processing_timestamp",
+        "inference_latency",
+        "evaluation_status",
+        "review_recommendation"
+      ]
+    },
+    "test_5_db_persistence": {
+      "status": "PASSED",
+      "description": "PostgreSQL persistence verification of Submission, IdentificationResult, and MediaFile records",
+      "db_submission": "fe218d5c-25fb-479d-81c7-8e8d7f78edf5 | 88b35a18-cf17-4265-84c4-91e21442b011 | completed | adult",
+      "db_result": "aedes | vectora_v3_fp32.onnx | 83ms",
+      "media_records_count": 2
+    },
+    "test_6_user_isolation": {
+      "status": "PASSED",
+      "description": "Row-level authorization blocking cross-user scan retrieval and leaking",
+      "cross_access_status_code": 403,
+      "isolation_verified": true
+    },
+    "test_7_ollama_offline_resilience": {
+      "status": "PASSED",
+      "description": "Adult inference execution and completion when Ollama assistant daemon is fully offline",
+      "assistant_status": "unavailable",
+      "adult_inference_status_code": 201,
+      "predicted_genus": "culex"
+    },
+    "test_8_backend_restart_persistence": {
+      "status": "PASSED",
+      "description": "Verification of DB records and specimen image survival across container restart",
+      "retrieved_scan_id": "fe218d5c-25fb-479d-81c7-8e8d7f78edf5",
+      "retrieved_image_bytes": 2143933
+    },
+    "test_9_offline_sync_simulation": {
+      "status": "PASSED",
+      "description": "Android offline Room queue simulation and batch sync upon reconnect; local prediction rule enforced",
+      "local_id": "offline_task_1795425487",
+      "server_scan_id": "9b523abe-9fbc-4f31-bc59-ad1fc9600b11",
+      "server_prediction": "anopheles",
+      "client_no_local_pred_rule_enforced": true
+    },
+    "test_10_boundary_rejection": {
+      "status": "PASSED",
+      "description": "Rejection of invalid mime types, corrupted image bytes, and negative or out-of-bounds crops",
+      "bad_type_error": "INVALID_FILE_TYPE",
+      "corrupt_image_error": "CORRUPTED_IMAGE",
+      "bad_crop_error": "INVALID_CROP_COORDINATES"
+    },
+    "test_11_larvae_isolation": {
+      "status": "PASSED",
+      "description": "Strict isolation of larvae research workflow; adult model is never invoked",
+      "larvae_submissions_accessible": true,
+      "adult_model_not_called_for_larvae": true
+    },
+    "test_12_model_integrity": {
+      "status": "PASSED",
+      "description": "Pre- and post-test SHA-256 verification of production ONNX model vectora_v3_fp32.onnx",
+      "expected_sha256": "c3a3656f746a1bb2e7ac428e44670d89cf51f0d0f923ad3aa15420e8a4592cfa",
+      "actual_sha256": "c3a3656f746a1bb2e7ac428e44670d89cf51f0d0f923ad3aa15420e8a4592cfa",
+      "server_checksum_verified": true
+    }
+  },
+  "benchmarks": {
+    "sample_count": 20,
+    "failed_requests": 0,
+    "success_rate_percent": 100.0,
+    "roundtrip_latency_ms": {
+      "min": 399.11,
+      "median_p50": 459.42,
+      "mean": 487.71,
+      "p95": 878.76,
+      "max": 878.76
+    },
+    "onnx_model_inference_ms": {
+      "min": 60,
+      "median_p50": 65,
+      "mean": 74.95,
+      "p95": 203,
+      "max": 203
+    }
+  },
+  "summary": {
+    "total": 12,
+    "passed": 12,
+    "failed": 0,
+    "verdict": "ACCEPTANCE_TESTS_100_PERCENT_PASSED"
+  }
+}

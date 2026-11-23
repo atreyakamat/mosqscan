@@ -94,6 +94,10 @@ fun AdultUploadScreen(
 
                     val respBody = response.body()!!
                     val result = respBody.result
+                    val scores = result?.allScores
+                    val scoreAedes = scores?.get("aedes") ?: scores?.get("Aedes")
+                    val scoreAnopheles = scores?.get("anopheles") ?: scores?.get("Anopheles")
+                    val scoreCulex = scores?.get("culex") ?: scores?.get("Culex")
 
                     withContext(Dispatchers.IO) {
                         submissionDao.updateWithRemoteResult(
@@ -103,9 +107,12 @@ fun AdultUploadScreen(
                             confidence = result?.confidence,
                             rawScore = result?.rawScore ?: result?.confidence,
                             isUncertain = result?.isUncertain ?: true,
-                            modelVersion = result?.modelVersion ?: "vectora-2.2",
+                            modelVersion = result?.modelVersion ?: "3.0.0",
                             modelStatus = result?.modelStatus ?: "EXPERIMENTAL_NOT_FIELD_VALIDATED",
-                            processingTimeMs = result?.processingTimeMs
+                            processingTimeMs = result?.processingTimeMs,
+                            scoreAedes = scoreAedes,
+                            scoreAnopheles = scoreAnopheles,
+                            scoreCulex = scoreCulex
                         )
                     }
 
